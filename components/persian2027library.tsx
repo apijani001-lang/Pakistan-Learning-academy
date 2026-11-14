@@ -1,6 +1,5 @@
-"use client";
 
-import Link from "next/link";
+"use client";
 
 import {
   persian2027Info,
@@ -8,7 +7,6 @@ import {
 } from "@/data/class9-persian-2027";
 
 import {
-  persian2027Deletions,
   persian2027DeletionSummary,
 } from "@/data/class9-persian-2027-deletions";
 
@@ -21,147 +19,101 @@ export default function Persian2027Library({ bookUrl }: Props) {
 
   return (
     <main className="space-y-6">
-      {/* Header */}
-      <section className="rounded-3xl border border-purple-200 bg-gradient-to-br from-purple-50 via-white to-indigo-50 p-6 dark:border-purple-900 dark:from-purple-950/40 dark:via-gray-950 dark:to-indigo-950/40">
-        <div className="mb-3 flex flex-wrap gap-2">
-          <span className="rounded-full bg-purple-100 px-3 py-1 text-xs font-semibold text-purple-700 dark:bg-purple-900 dark:text-purple-200">
-            Class 9
+      <section className="rounded-3xl bg-gradient-to-br from-purple-950 via-indigo-900 to-violet-800 p-6 text-white shadow-xl sm:p-8">
+        <div className="flex flex-wrap gap-2">
+          <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold">
+            CLASS 9
           </span>
-
-          <span className="rounded-full bg-indigo-100 px-3 py-1 text-xs font-semibold text-indigo-700 dark:bg-indigo-900 dark:text-indigo-200">
-            Arts / Humanities
+          <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold">
+            ARTS / HUMANITIES
           </span>
-
-          <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700 dark:bg-green-900 dark:text-green-200">
-            Annual 2027
+          <span className="rounded-full bg-green-400/20 px-3 py-1 text-xs font-bold text-green-100">
+            ANNUAL 2027
           </span>
         </div>
 
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+        <h2 className="mt-5 text-3xl font-extrabold">
           Persian Library
         </h2>
 
-        <p
-          className="mt-2 text-3xl font-semibold text-purple-700 dark:text-purple-300"
-          dir="rtl"
-        >
+        <p dir="rtl" className="mt-3 text-3xl font-bold text-purple-100">
           فارسی
         </p>
 
-        <p className="mt-3 max-w-3xl text-sm leading-7 text-gray-600 dark:text-gray-300">
-          Class 9 Persian syllabus, prescribed textbook information and
-          examination paper pattern for the 2026–27 academic session.
+        <p className="mt-3 max-w-3xl text-sm leading-7 text-purple-100">
+          Class 9 Persian prescribed textbook information and
+          examination paper preparation for academic session 2026–27.
         </p>
-      </section>
 
-      {/* Exam Overview */}
-      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          {
-            label: "Total Marks",
-            value: info.partI.totalMarks,
-          },
-          {
-            label: "Objective Marks",
-            value: info.partI.objectiveMarks,
-          },
-          {
-            label: "Subjective Marks",
-            value: info.partI.subjectiveMarks,
-          },
-          {
-            label: "Exam Duration",
-            value: info.partI.duration,
-          },
-        ].map((item) => (
-          <div
-            key={item.label}
-            className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900"
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {[
+            { label: "Total Marks", value: info.partI.totalMarks },
+            { label: "Objective", value: info.partI.objectiveMarks },
+            { label: "Subjective", value: info.partI.subjectiveMarks },
+            { label: "Duration", value: info.partI.duration },
+          ].map((item) => (
+            <div key={item.label} className="rounded-2xl bg-white/10 p-4">
+              <p className="text-xl font-extrabold">{item.value}</p>
+              <p className="mt-1 text-xs text-purple-100">{item.label}</p>
+            </div>
+          ))}
+        </div>
+
+        {bookUrl && (
+          <a
+            href={bookUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex rounded-xl bg-white px-5 py-3 text-sm font-bold text-purple-950 transition hover:bg-purple-50"
           >
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              {item.label}
-            </p>
-
-            <p className="mt-2 text-2xl font-bold text-purple-700 dark:text-purple-300">
-              {item.value}
-            </p>
-          </div>
-        ))}
+            Open Persian Textbook
+          </a>
+        )}
       </section>
 
-      {/* Textbook */}
       <section className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
         <h3 className="text-xl font-bold text-gray-900 dark:text-white">
           Prescribed Textbook
         </h3>
 
         <div className="mt-4 space-y-3 text-sm text-gray-700 dark:text-gray-300">
-          <p>
-            <strong>Book:</strong> {info.textbookTitle}
-          </p>
-
-          <p>
-            <strong>Urdu Title:</strong> {info.textbookUrduTitle}
-          </p>
-
-          <p>
-            <strong>Authors:</strong> {info.authorsEditors.join(", ")}
-          </p>
-
-          <p>
-            <strong>Publisher:</strong> {info.publisher}
-          </p>
-
-          <p>
-            <strong>Medium:</strong> {info.medium}
-          </p>
-
-          <p>
-            <strong>Edition:</strong> {info.textbookEdition}
-          </p>
+          <p><strong>Book:</strong> {info.textbookTitle}</p>
+          <p><strong>Urdu Title:</strong> {info.textbookUrduTitle}</p>
+          <p><strong>Classes:</strong> {info.textbookClasses}</p>
+          <p><strong>Authors / Editors:</strong> {info.authorsEditors.join(", ")}</p>
+          <p><strong>Publisher:</strong> {info.publisher}</p>
+          <p><strong>Medium:</strong> {info.medium}</p>
+          <p><strong>Edition:</strong> {info.textbookEdition}</p>
         </div>
 
-        {bookUrl ? (
-          <a
-            href={bookUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex rounded-xl bg-purple-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-purple-700"
-          >
-            Open Textbook
-          </a>
-        ) : (
-          <p className="mt-4 rounded-xl bg-amber-50 p-3 text-sm text-amber-800 dark:bg-amber-950/30 dark:text-amber-300">
-            Original Persian textbook PDF has not yet been visually verified.
-            We are not displaying an unverified download link.
+        {!bookUrl && (
+          <p className="mt-4 rounded-xl bg-amber-50 p-3 text-sm text-amber-800 dark:bg-amber-950/30 dark:text-amber-200">
+            Original textbook PDF visual verification pending.
+            Unverified download link is not displayed.
           </p>
         )}
       </section>
 
-      {/* Paper Pattern */}
       <section className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
-        <div className="mb-5">
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-            Class 9 Persian Paper Pattern
-          </h3>
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+          Class 9 Persian Paper Pattern
+        </h3>
 
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            BISE Lahore syllabus 2025–2027
-          </p>
-        </div>
+        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+          BISE Lahore syllabus 2025–2027.
+        </p>
 
-        <div className="mb-5 grid gap-3 sm:grid-cols-2">
+        <div className="mt-5 grid gap-3 sm:grid-cols-2">
           <div className="rounded-xl bg-purple-50 p-4 dark:bg-purple-950/30">
             <p className="text-sm text-gray-600 dark:text-gray-300">
               Objective Section
             </p>
-
             <p className="mt-1 text-2xl font-bold text-purple-700 dark:text-purple-300">
-              15 Marks
+              {info.partI.objectiveMarks} Marks
             </p>
-
             <p className="text-xs text-gray-500 dark:text-gray-400">
-              15 questions · 20 minutes
+              {info.partI.objectiveQuestions} questions ·{" "}
+              {info.partI.objectiveDuration}
             </p>
           </div>
 
@@ -169,18 +121,16 @@ export default function Persian2027Library({ bookUrl }: Props) {
             <p className="text-sm text-gray-600 dark:text-gray-300">
               Subjective Section
             </p>
-
             <p className="mt-1 text-2xl font-bold text-indigo-700 dark:text-indigo-300">
-              60 Marks
+              {info.partI.subjectiveMarks} Marks
             </p>
-
             <p className="text-xs text-gray-500 dark:text-gray-400">
-              Short answers, prose and poetry
+              {info.partI.subjectiveDuration}
             </p>
           </div>
         </div>
 
-        <div className="space-y-3">
+        <div className="mt-5 space-y-3">
           {persian2027PaperSections.map((section, index) => (
             <div
               key={`${section.question}-${index}`}
@@ -190,7 +140,6 @@ export default function Persian2027Library({ bookUrl }: Props) {
                 <p className="font-semibold text-gray-900 dark:text-white">
                   {section.question}
                 </p>
-
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
                   {section.description}
                 </p>
@@ -204,11 +153,10 @@ export default function Persian2027Library({ bookUrl }: Props) {
         </div>
 
         <p className="mt-4 text-xs text-gray-500 dark:text-gray-400">
-          The objective and subjective marks together make 75 marks.
+          Objective aur subjective marks mila kar 75 marks bante hain.
         </p>
       </section>
 
-      {/* Deletion Status */}
       <section className="rounded-2xl border border-amber-200 bg-amber-50 p-6 dark:border-amber-900 dark:bg-amber-950/20">
         <h3 className="text-xl font-bold text-amber-900 dark:text-amber-200">
           2027 ALP / Deleted Topics Status
@@ -218,69 +166,60 @@ export default function Persian2027Library({ bookUrl }: Props) {
           {persian2027DeletionSummary.note}
         </p>
 
-        <div className="mt-4 rounded-xl bg-white/70 p-4 dark:bg-gray-900/60">
-          <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">
-            Verified deleted topics: {persian2027Deletions.length}
-          </p>
-
-          <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
-            No Persian lesson, poetry or translation exercise has been marked
-            excluded without official confirmation.
-          </p>
-        </div>
+        <p className="mt-4 text-sm font-bold text-amber-900 dark:text-amber-200">
+          Status: {persian2027DeletionSummary.status}
+        </p>
       </section>
 
-      {/* Verification */}
       <section className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
         <h3 className="text-lg font-bold text-gray-900 dark:text-white">
           Content Verification
         </h3>
 
-        <ul className="mt-4 space-y-2 text-sm text-gray-700 dark:text-gray-300">
-          <li>✓ Official board syllabus and examination scheme checked</li>
-          <li>✓ Prescribed textbook reference recorded</li>
-          <li>! Individual chapter and lesson titles need verification</li>
-          <li>! Original textbook PDF visual verification pending</li>
-          <li>! 2027 subject-specific ALP status not verified</li>
+        <ul className="mt-4 space-y-3 text-sm text-gray-700 dark:text-gray-300">
+          {info.notes.map((note, index) => (
+            <li key={index} className="flex items-start gap-2">
+              <span className="mt-1 text-purple-600">•</span>
+              <span>{note}</span>
+            </li>
+          ))}
         </ul>
       </section>
 
-      {/* Official Sources */}
-      <section className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
-        <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-          Official Reference
+      <section className="rounded-2xl border border-blue-200 bg-blue-50 p-6 dark:border-blue-900 dark:bg-blue-950/20">
+        <h3 className="text-lg font-bold text-blue-950 dark:text-blue-200">
+          Official References
         </h3>
 
         <div className="mt-4 flex flex-col gap-3 text-sm">
           <a
-            href="https://home.biselahore.com/downloads/notifications/misc/Syllabus_9th%2610th_%282025_27%29.pdf"
+            href={info.sources.boardSyllabus}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-medium text-purple-700 hover:underline dark:text-purple-300"
+            className="font-semibold text-blue-800 underline dark:text-blue-300"
           >
             BISE Lahore — Class 9 & 10 Syllabus 2025–2027
           </a>
 
           <a
-            href="https://pectaa.edu.pk/books-and-publications/"
+            href={info.sources.officialBooks}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-medium text-purple-700 hover:underline dark:text-purple-300"
+            className="font-semibold text-blue-800 underline dark:text-blue-300"
           >
             PECTAA — Books and Publications
           </a>
+
+          <a
+            href={info.sources.officialCurriculum}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-blue-800 underline dark:text-blue-300"
+          >
+            PECTAA — Curriculum Compliance
+          </a>
         </div>
       </section>
-
-      {/* Back Button */}
-      <div className="text-center">
-        <Link
-          href="/classes"
-          className="inline-flex rounded-xl border border-gray-300 px-5 py-3 text-sm font-semibold text-gray-700 transition hover:bg-gray-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
-        >
-          Back to Classes
-        </Link>
-      </div>
     </main>
   );
 }

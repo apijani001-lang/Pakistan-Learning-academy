@@ -1,12 +1,8 @@
+
 import {
   homeEconomics2027Info,
   homeEconomicsChapters2027,
 } from "@/data/class9-home-economics-2027";
-
-import {
-  homeEconomics2027Deletions,
-  homeEconomics2027DeletionSummary,
-} from "@/data/class9-home-economics-2027-deletions";
 
 type Props = {
   bookUrl?: string;
@@ -15,54 +11,50 @@ type Props = {
 export default function HomeEconomics2027Library({ bookUrl }: Props) {
   return (
     <main className="space-y-8">
-      {/* Hero */}
-      <section className="overflow-hidden rounded-3xl bg-gradient-to-br from-rose-700 via-pink-700 to-purple-800 p-6 text-white shadow-xl sm:p-10">
-        <div className="max-w-3xl">
-          <span className="inline-flex rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-sm font-medium">
-            Class 9 · Academic Session 2026–27
-          </span>
+      <section className="overflow-hidden rounded-3xl bg-gradient-to-br from-rose-800 via-pink-800 to-purple-900 p-6 text-white shadow-xl sm:p-10">
+        <span className="inline-flex rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-sm font-medium">
+          Class 9 · Arts Elective · Academic Session 2026–27
+        </span>
 
-          <h1 className="mt-5 text-3xl font-extrabold tracking-tight sm:text-4xl">
-            Elements of Home Economics
-          </h1>
+        <h1 className="mt-5 text-3xl font-extrabold tracking-tight sm:text-4xl">
+          Elements of Home Economics
+        </h1>
 
-          <p className="mt-3 text-lg text-pink-100">
-            Class 9 Home Economics learning library for Arts Group students.
-          </p>
+        <p className="mt-3 text-lg text-pink-100">
+          Class 9 Home Economics learning library for Arts Group students.
+        </p>
 
-          <p className="mt-2 text-base text-pink-100">
-            {homeEconomics2027Info.subjectUrdu}
-          </p>
+        <p className="mt-2 text-base text-pink-100" dir="rtl">
+          {homeEconomics2027Info.subjectUrdu}
+        </p>
 
-          <div className="mt-6 flex flex-wrap gap-3">
-            {bookUrl ? (
-              <a
-                href={bookUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-xl bg-white px-5 py-3 font-semibold text-pink-800 transition hover:bg-pink-50"
-              >
-                Open Textbook
-              </a>
-            ) : (
-              <span className="rounded-xl border border-white/30 bg-white/10 px-5 py-3 text-sm">
-                Textbook PDF link pending verification
-              </span>
-            )}
-
+        <div className="mt-6 flex flex-wrap gap-3">
+          {bookUrl ? (
             <a
-              href={homeEconomics2027Info.sources.pectaa}
+              href={bookUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-xl border border-white/40 px-5 py-3 font-semibold text-white transition hover:bg-white/10"
+              className="rounded-xl bg-white px-5 py-3 font-semibold text-pink-900 transition hover:bg-pink-50"
             >
-              PECTAA Official Books
+              Open Textbook
             </a>
-          </div>
+          ) : (
+            <span className="rounded-xl border border-white/30 bg-white/10 px-5 py-3 text-sm">
+              Textbook PDF verification pending
+            </span>
+          )}
+
+          <a
+            href={homeEconomics2027Info.sources.pectaa}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-xl border border-white/40 px-5 py-3 font-semibold text-white transition hover:bg-white/10"
+          >
+            PECTAA Official Books
+          </a>
         </div>
       </section>
 
-      {/* Summary */}
       <section className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <SummaryCard
           label="Class"
@@ -77,19 +69,18 @@ export default function HomeEconomics2027Library({ bookUrl }: Props) {
         />
 
         <SummaryCard
-          label="Verified Marks"
+          label="Total Marks"
           value={String(homeEconomics2027Info.totalMarks)}
           detail="BISE Lahore syllabus"
         />
 
         <SummaryCard
-          label="Verified Deletions"
-          value={String(homeEconomics2027Deletions.length)}
-          detail="No confirmed exclusions"
+          label="Paper Duration"
+          value={homeEconomics2027Info.examDuration}
+          detail="Scheme reference"
         />
       </section>
 
-      {/* Verification Notice */}
       <section className="rounded-2xl border border-amber-300 bg-amber-50 p-5 dark:border-amber-800 dark:bg-amber-950/30">
         <div className="flex items-start gap-3">
           <span className="text-2xl" aria-hidden="true">
@@ -102,159 +93,124 @@ export default function HomeEconomics2027Library({ bookUrl }: Props) {
             </h2>
 
             <p className="mt-2 text-sm leading-7 text-amber-900 dark:text-amber-100">
-              The BISE Lahore syllabus lists Elements of Home Economics as a
-              Class IX elective. However, the complete original textbook
-              contents have not yet been visually verified. The sections
-              below are provisional references, not a confirmed complete
-              chapter list. Missing section numbers have intentionally not
-              been invented.
+              {homeEconomics2027Info.note}
+            </p>
+
+            <p className="mt-3 text-sm font-semibold text-amber-800 dark:text-amber-300">
+              The sections below are provisional references, not a
+              confirmed complete chapter list.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Available Sections */}
       <section>
         <div className="mb-5">
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-            Home Economics — Available Sections
+            Available Home Economics Sections
           </h2>
 
           <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
-            These are the available syllabus sections. Their original
-            textbook chapter numbers and complete contents still require
+            Only the section headings currently available in the
+            syllabus outline are displayed. Their original textbook
+            chapter numbers and complete contents are still awaiting
             verification.
           </p>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          {homeEconomicsChapters2027.map((chapter) => {
-            const deletion = homeEconomics2027Deletions.find(
-              (item) => item.chapter === chapter.number
-            );
-
-            return (
-              <article
-                key={chapter.number}
-                className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-700 dark:bg-slate-900"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-pink-100 text-lg font-extrabold text-pink-700 dark:bg-pink-950 dark:text-pink-300">
-                    {chapter.number}
-                  </div>
-
-                  <div className="min-w-0 flex-1">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-pink-600 dark:text-pink-400">
-                      Available Section
-                    </p>
-
-                    <h3 className="mt-1 font-bold leading-6 text-slate-900 dark:text-white">
-                      {chapter.title}
-                    </h3>
-                  </div>
+          {homeEconomicsChapters2027.map((chapter) => (
+            <article
+              key={chapter.number}
+              className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900"
+            >
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-pink-100 text-lg font-extrabold text-pink-800 dark:bg-pink-950 dark:text-pink-300">
+                  {chapter.number}
                 </div>
 
-                {chapter.topics.length > 0 && (
-                  <ul className="mt-5 space-y-2">
-                    {chapter.topics.map((topic, index) => (
-                      <li
-                        key={index}
-                        className="flex gap-2 text-sm leading-6 text-slate-600 dark:text-slate-300"
-                      >
-                        <span className="shrink-0 text-pink-600">•</span>
-                        <span>{topic}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                {deletion?.examNote && (
-                  <p className="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 dark:bg-amber-950/30 dark:text-amber-200">
-                    {deletion.examNote}
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-pink-700 dark:text-pink-400">
+                    Provisional Section
                   </p>
-                )}
 
-                <div className="mt-5 border-t border-slate-100 pt-3 dark:border-slate-800">
-                  <span className="text-xs font-medium text-amber-700 dark:text-amber-300">
-                    Section details pending verification
-                  </span>
+                  <h3 className="mt-1 font-bold leading-6 text-slate-900 dark:text-white">
+                    {chapter.title}
+                  </h3>
+
+                  <p className="mt-3 text-xs font-medium text-amber-700 dark:text-amber-300">
+                    Original textbook verification pending
+                  </p>
                 </div>
-              </article>
-            );
-          })}
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
-      {/* Examination Information */}
       <section className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
         <h2 className="text-xl font-bold text-slate-900 dark:text-white">
           Examination Information
         </h2>
 
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
-          <InfoRow
-            label="Subject"
-            value={homeEconomics2027Info.subject}
-          />
-
+          <InfoRow label="Subject" value={homeEconomics2027Info.subject} />
           <InfoRow label="Class" value="9" />
-
           <InfoRow
             label="Academic Session"
             value={homeEconomics2027Info.session}
           />
-
           <InfoRow
             label="Examination"
             value={homeEconomics2027Info.examination}
           />
-
           <InfoRow
             label="Total Marks"
             value={String(homeEconomics2027Info.totalMarks)}
           />
-
           <InfoRow
             label="Exam Duration"
-            value="Pending official verification"
+            value={homeEconomics2027Info.examDuration}
           />
-
           <InfoRow
             label="Medium"
             value={homeEconomics2027Info.medium}
           />
-
           <InfoRow
             label="Textbook Authority"
             value={homeEconomics2027Info.textbookAuthority}
           />
+          <InfoRow
+            label="Textbook Edition"
+            value={homeEconomics2027Info.textbookEdition}
+          />
         </div>
       </section>
 
-      {/* ALP Status */}
-      <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-700 dark:bg-slate-800/60">
-        <h2 className="text-xl font-bold text-slate-900 dark:text-white">
+      <section className="rounded-2xl border border-blue-200 bg-blue-50 p-5 dark:border-blue-900 dark:bg-blue-950/30">
+        <h2 className="font-bold text-blue-900 dark:text-blue-200">
           2027 Smart Syllabus / ALP Status
         </h2>
 
-        <p className="mt-3 text-sm leading-7 text-slate-700 dark:text-slate-300">
-          {homeEconomics2027DeletionSummary.note}
+        <p className="mt-2 text-sm leading-7 text-blue-900 dark:text-blue-100">
+          No subject-specific Home Economics Annual Examination 2027
+          ALP deletion list has been independently verified. No chapter,
+          topic, exercise or question has been marked deleted.
         </p>
 
-        <p className="mt-3 text-sm font-semibold text-amber-700 dark:text-amber-300">
-          Status: {homeEconomics2027DeletionSummary.status}
+        <p className="mt-3 text-sm font-semibold text-blue-800 dark:text-blue-300">
+          Status: Subject-specific 2027 ALP verification pending
         </p>
       </section>
 
-      {/* Official Sources */}
       <section className="rounded-2xl border border-purple-200 bg-purple-50 p-5 dark:border-purple-900 dark:bg-purple-950/30">
         <h2 className="font-bold text-purple-900 dark:text-purple-200">
           Official Curriculum Sources
         </h2>
 
         <p className="mt-2 text-sm leading-6 text-purple-900 dark:text-purple-100">
-          Check the official board syllabus and PECTAA catalogue for
-          textbook and examination updates.
+          Consult the official board syllabus and PECTAA catalogue
+          for textbook and examination updates.
         </p>
 
         <div className="mt-4 flex flex-wrap gap-4">
@@ -279,7 +235,7 @@ export default function HomeEconomics2027Library({ bookUrl }: Props) {
       </section>
 
       <div className="text-center text-xs leading-6 text-slate-500 dark:text-slate-400">
-        Pakistan Learning Academy · Home Economics · 2026–27
+        Pakistan Learning Academy · Home Economics · Class 9 · 2026–27
       </div>
     </main>
   );
@@ -296,7 +252,9 @@ function SummaryCard({
 }) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-      <p className="text-sm text-slate-500 dark:text-slate-400">{label}</p>
+      <p className="text-sm text-slate-500 dark:text-slate-400">
+        {label}
+      </p>
 
       <p className="mt-2 text-2xl font-extrabold text-slate-900 dark:text-white">
         {value}
@@ -309,7 +267,13 @@ function SummaryCard({
   );
 }
 
-function InfoRow({ label, value }: { label: string; value: string }) {
+function InfoRow({
+  label,
+  value,
+}: {
+  label: string;
+  value: string;
+}) {
   return (
     <div className="rounded-xl bg-slate-50 p-4 dark:bg-slate-800">
       <p className="text-xs font-medium text-slate-500 dark:text-slate-400">

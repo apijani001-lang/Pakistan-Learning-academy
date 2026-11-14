@@ -1,12 +1,8 @@
+
 import {
   healthPhysicalEducation2027Info,
   healthPhysicalEducationChapters2027,
 } from "@/data/class9-health-physical-education-2027";
-
-import {
-  healthPhysicalEducation2027Deletions,
-  healthPhysicalEducation2027DeletionSummary,
-} from "@/data/class9-health-physical-education-2027-deletions";
 
 type Props = {
   bookUrl?: string;
@@ -17,7 +13,6 @@ export default function HealthPhysicalEducation2027Library({
 }: Props) {
   return (
     <main className="space-y-8">
-      {/* Hero */}
       <section className="overflow-hidden rounded-3xl bg-gradient-to-br from-sky-800 via-blue-800 to-indigo-900 p-6 text-white shadow-xl sm:p-10">
         <span className="inline-flex rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-sm">
           Class 9 · Arts Elective · Academic Session 2026–27
@@ -27,13 +22,13 @@ export default function HealthPhysicalEducation2027Library({
           Health &amp; Physical Education
         </h1>
 
-        <p className="mt-3 max-w-2xl leading-7 text-sky-100">
-          Explore health education, physical education and the
-          theoretical and practical aspects of the subject.
+        <p className="mt-3 text-xl text-sky-100" dir="rtl">
+          {healthPhysicalEducation2027Info.subjectUrdu}
         </p>
 
-        <p className="mt-2 text-lg text-sky-100">
-          {healthPhysicalEducation2027Info.subjectUrdu}
+        <p className="mt-4 max-w-2xl text-sm leading-7 text-sky-100">
+          Class 9 health education and physical education examination
+          information for Annual Examination 2027.
         </p>
 
         <div className="mt-6 flex flex-wrap gap-3">
@@ -63,14 +58,7 @@ export default function HealthPhysicalEducation2027Library({
         </div>
       </section>
 
-      {/* Summary */}
-      <section className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <SummaryCard
-          label="Class"
-          value="9th"
-          detail="Arts Elective"
-        />
-
+      <section className="grid grid-cols-2 gap-4 lg:grid-cols-3">
         <SummaryCard
           label="Theory Marks"
           value={String(healthPhysicalEducation2027Info.theoryMarks)}
@@ -90,7 +78,6 @@ export default function HealthPhysicalEducation2027Library({
         />
       </section>
 
-      {/* Verification notice */}
       <section className="rounded-2xl border border-amber-300 bg-amber-50 p-5 dark:border-amber-800 dark:bg-amber-950/30">
         <div className="flex items-start gap-3">
           <span className="text-2xl" aria-hidden="true">
@@ -103,18 +90,12 @@ export default function HealthPhysicalEducation2027Library({
             </h2>
 
             <p className="mt-2 text-sm leading-7 text-amber-900 dark:text-amber-100">
-              The BISE Lahore syllabus confirms Health &amp; Physical
-              Education as a Humanities elective and provides the
-              Part-I marks scheme. The original textbook chapter
-              sequence has not yet been independently verified.
-              Therefore, no guessed chapter titles or topics are
-              displayed.
+              {healthPhysicalEducation2027Info.note}
             </p>
           </div>
         </div>
       </section>
 
-      {/* Chapter Library */}
       <section className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
           Class 9 Chapter Library
@@ -142,7 +123,7 @@ export default function HealthPhysicalEducation2027Library({
                         key={index}
                         className="text-sm leading-6 text-slate-600 dark:text-slate-300"
                       >
-                        • {topic}
+                        {topic}
                       </li>
                     ))}
                   </ul>
@@ -161,14 +142,14 @@ export default function HealthPhysicalEducation2027Library({
             </h3>
 
             <p className="mx-auto mt-2 max-w-xl text-sm leading-7 text-slate-600 dark:text-slate-300">
-              The chapter library will be populated after the
-              original textbook contents are verified.
+              The original textbook chapter sequence has not yet
+              been independently verified. Chapter titles and topics
+              will be added after verification.
             </p>
           </div>
         )}
       </section>
 
-      {/* Examination information */}
       <section className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
         <h2 className="text-xl font-bold text-slate-900 dark:text-white">
           Examination Information
@@ -214,48 +195,54 @@ export default function HealthPhysicalEducation2027Library({
 
           <InfoRow
             label="Exam Duration"
-            value="Pending independent verification"
+            value="Not independently verified"
           />
 
           <InfoRow
             label="Medium"
             value={healthPhysicalEducation2027Info.medium}
           />
+
+          <InfoRow
+            label="Textbook Authority"
+            value={healthPhysicalEducation2027Info.textbookAuthority}
+          />
+
+          <InfoRow
+            label="Textbook Edition"
+            value={healthPhysicalEducation2027Info.textbookEdition}
+          />
         </div>
       </section>
 
-      {/* ALP status */}
-      <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-700 dark:bg-slate-800/60">
-        <h2 className="text-xl font-bold text-slate-900 dark:text-white">
+      <section className="rounded-2xl border border-blue-200 bg-blue-50 p-5 dark:border-blue-900 dark:bg-blue-950/30">
+        <h2 className="font-bold text-blue-900 dark:text-blue-200">
           2027 Smart Syllabus / ALP Status
         </h2>
 
-        <p className="mt-3 text-sm leading-7 text-slate-700 dark:text-slate-300">
-          {healthPhysicalEducation2027DeletionSummary.note}
+        <p className="mt-2 text-sm leading-7 text-blue-900 dark:text-blue-100">
+          No subject-specific Health &amp; Physical Education
+          Annual Examination 2027 ALP deletion list has been
+          independently verified. No chapter, topic or exercise
+          has been marked deleted.
         </p>
 
-        <p className="mt-3 text-sm font-semibold text-amber-700 dark:text-amber-300">
-          {healthPhysicalEducation2027DeletionSummary.status}
+        <p className="mt-3 text-sm font-semibold text-blue-800 dark:text-blue-300">
+          Status: Subject-specific 2027 ALP verification pending
         </p>
       </section>
 
-      {/* Sources */}
-      <section className="rounded-2xl border border-blue-200 bg-blue-50 p-5 dark:border-blue-900 dark:bg-blue-950/30">
-        <h2 className="font-bold text-blue-900 dark:text-blue-200">
+      <section className="rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-800/60">
+        <h2 className="font-bold text-slate-900 dark:text-white">
           Official Curriculum Sources
         </h2>
 
-        <p className="mt-2 text-sm leading-6 text-blue-900 dark:text-blue-100">
-          Consult the official board syllabus and PECTAA catalogue
-          for textbook and examination updates.
-        </p>
-
-        <div className="mt-4 flex flex-wrap gap-4">
+        <div className="mt-4 flex flex-wrap gap-4 text-sm font-semibold">
           <a
             href={healthPhysicalEducation2027Info.sources.biseLahore}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold text-blue-800 underline underline-offset-4 dark:text-blue-300"
+            className="text-blue-800 underline underline-offset-4 dark:text-blue-300"
           >
             BISE Lahore Syllabus
           </a>
@@ -264,7 +251,7 @@ export default function HealthPhysicalEducation2027Library({
             href={healthPhysicalEducation2027Info.sources.pectaa}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold text-blue-800 underline underline-offset-4 dark:text-blue-300"
+            className="text-blue-800 underline underline-offset-4 dark:text-blue-300"
           >
             PECTAA Books
           </a>
@@ -273,16 +260,16 @@ export default function HealthPhysicalEducation2027Library({
             href={healthPhysicalEducation2027Info.sources.curriculum}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold text-blue-800 underline underline-offset-4 dark:text-blue-300"
+            className="text-blue-800 underline underline-offset-4 dark:text-blue-300"
           >
             PECTAA Curriculum
           </a>
         </div>
       </section>
 
-      <div className="text-center text-xs text-slate-500 dark:text-slate-400">
-        Pakistan Learning Academy · Health &amp; Physical Education · 2026–27
-      </div>
+      <p className="text-center text-xs text-slate-500 dark:text-slate-400">
+        Pakistan Learning Academy · Health &amp; Physical Education · Class 9
+      </p>
     </main>
   );
 }

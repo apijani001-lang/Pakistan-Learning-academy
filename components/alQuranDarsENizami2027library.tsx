@@ -1,4 +1,3 @@
-// components/alQuranDarsENizami2027library.tsx
 
 import Link from "next/link";
 
@@ -8,7 +7,6 @@ import {
 } from "@/data/class9-al-quran-dars-e-nizami-2027";
 
 import {
-  alQuran2027Deletions,
   alQuran2027DeletionSummary,
 } from "@/data/class9-al-quran-dars-e-nizami-2027-deletions";
 
@@ -27,17 +25,14 @@ export default function AlQuranDarsENizami2027Library({
 
   return (
     <main className="space-y-8">
-      {/* Header */}
       <section className="overflow-hidden rounded-3xl border border-emerald-200 bg-gradient-to-br from-emerald-50 via-white to-teal-50 p-6 shadow-sm dark:border-emerald-900/50 dark:from-emerald-950/30 dark:via-gray-900 dark:to-teal-950/20 sm:p-8">
         <div className="flex flex-wrap gap-2">
           <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200">
             CLASS 9
           </span>
-
           <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-300">
-            Annual Examination 2027
+            {alQuran2027Info.examination}
           </span>
-
           <span className="rounded-full bg-purple-100 px-3 py-1 text-xs font-bold text-purple-800 dark:bg-purple-900/40 dark:text-purple-200">
             Dars-e-Nizami Group
           </span>
@@ -51,13 +46,13 @@ export default function AlQuranDarsENizami2027Library({
           className="mt-3 text-3xl font-bold text-emerald-800 dark:text-emerald-300"
           dir="rtl"
         >
-          القرآن
+          {alQuran2027Info.subjectUrdu}
         </p>
 
         <p className="mt-4 max-w-3xl text-sm leading-7 text-gray-600 dark:text-gray-300">
           Class 9 Quran syllabus for the Dars-e-Nizami group,
-          including prescribed Surahs, translation, themes
-          and examination information for the 2026–27 session.
+          including prescribed Surahs, translation, summaries
+          and important themes for the 2026–27 session.
         </p>
 
         {bookUrl && (
@@ -67,13 +62,11 @@ export default function AlQuranDarsENizami2027Library({
             rel="noopener noreferrer"
             className="mt-6 inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-5 py-3 text-sm font-bold text-white transition hover:bg-emerald-800"
           >
-            Open Study Book
-            <span aria-hidden="true">↗</span>
+            Open Study Book ↗
           </a>
         )}
       </section>
 
-      {/* Examination Scheme */}
       <section>
         <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
           Examination Scheme
@@ -82,11 +75,11 @@ export default function AlQuranDarsENizami2027Library({
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {[
             {
-              label: "Class 9 Marks",
+              label: "Class 9 Part I",
               value: `${alQuran2027Info.partI.marks} Marks`,
             },
             {
-              label: "Class 10 Marks",
+              label: "Class 10 Part II",
               value: `${alQuran2027Info.partII.marks} Marks`,
             },
             {
@@ -101,7 +94,6 @@ export default function AlQuranDarsENizami2027Library({
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 {item.label}
               </p>
-
               <p className="mt-2 text-xl font-extrabold text-gray-900 dark:text-white">
                 {item.value}
               </p>
@@ -109,21 +101,20 @@ export default function AlQuranDarsENizami2027Library({
           ))}
         </div>
 
-        <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
-          Class 9 examination duration has not been independently verified.
+        <p className="mt-3 text-xs leading-6 text-orange-700 dark:text-orange-300">
+          Class 9 examination duration has not been independently
+          verified, so no duration is displayed.
         </p>
       </section>
 
-      {/* Class 9 Syllabus */}
       <section>
         <div className="mb-5">
           <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white">
             Class 9 Syllabus — Part I
           </h2>
-
           <p className="mt-2 text-sm leading-6 text-gray-500 dark:text-gray-400">
-            The following prescribed portions are listed in the
-            BISE Lahore syllabus for Class 9 Dars-e-Nizami.
+            Prescribed portions listed in the BISE Lahore syllabus
+            for Class 9 Dars-e-Nizami.
           </p>
         </div>
 
@@ -143,7 +134,6 @@ export default function AlQuranDarsENizami2027Library({
                     <h3 className="font-bold leading-6 text-gray-900 dark:text-white">
                       {section.title}
                     </h3>
-
                     <p
                       className="mt-2 text-xl leading-8 text-gray-700 dark:text-gray-300"
                       dir="rtl"
@@ -167,8 +157,7 @@ export default function AlQuranDarsENizami2027Library({
                         <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-200 text-xs font-bold text-emerald-900 dark:bg-emerald-900 dark:text-emerald-200">
                           {index + 1}
                         </span>
-
-                        {detail}
+                        <span>{detail}</span>
                       </li>
                     ))}
                   </ul>
@@ -179,7 +168,6 @@ export default function AlQuranDarsENizami2027Library({
         </div>
       </section>
 
-      {/* Class 10 Reference */}
       {class10Section && (
         <section className="rounded-2xl border border-purple-200 bg-purple-50/60 p-5 dark:border-purple-900/50 dark:bg-purple-950/20">
           <h2 className="text-lg font-bold text-gray-900 dark:text-white">
@@ -211,7 +199,7 @@ export default function AlQuranDarsENizami2027Library({
                   className="flex items-start gap-3 text-sm leading-6 text-gray-700 dark:text-gray-300"
                 >
                   <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-purple-500" />
-                  {detail}
+                  <span>{detail}</span>
                 </li>
               ))}
             </ul>
@@ -219,7 +207,6 @@ export default function AlQuranDarsENizami2027Library({
         </section>
       )}
 
-      {/* Study Guidance */}
       <section className="rounded-2xl border border-blue-200 bg-blue-50/60 p-5 dark:border-blue-900/50 dark:bg-blue-950/20">
         <h2 className="text-lg font-bold text-gray-900 dark:text-white">
           Study Guidance
@@ -238,7 +225,6 @@ export default function AlQuranDarsENizami2027Library({
         </p>
       </section>
 
-      {/* ALP Status */}
       <section className="rounded-2xl border border-orange-200 bg-orange-50/70 p-5 dark:border-orange-900/50 dark:bg-orange-950/20">
         <h2 className="text-lg font-bold text-gray-900 dark:text-white">
           2027 ALP & Deletion Status
@@ -251,14 +237,8 @@ export default function AlQuranDarsENizami2027Library({
         <p className="mt-3 text-sm leading-7 text-gray-700 dark:text-gray-300">
           {alQuran2027DeletionSummary.note}
         </p>
-
-        <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
-          Verified deletion entries:{" "}
-          <strong>{alQuran2027Deletions.length}</strong>
-        </p>
       </section>
 
-      {/* Textbook Information */}
       <section className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-900">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white">
           Textbook & Reference Information
@@ -266,23 +246,16 @@ export default function AlQuranDarsENizami2027Library({
 
         <div className="mt-4 space-y-3 text-sm leading-7 text-gray-700 dark:text-gray-300">
           <p>
-            <strong>Subject:</strong>{" "}
-            {alQuran2027Info.subject}
+            <strong>Subject:</strong> {alQuran2027Info.subject}
           </p>
-
           <p>
-            <strong>Group:</strong>{" "}
-            {alQuran2027Info.group}
+            <strong>Group:</strong> {alQuran2027Info.group}
           </p>
-
           <p>
-            <strong>Reference:</strong>{" "}
-            {alQuran2027Info.textbook.note}
+            <strong>Reference:</strong> {alQuran2027Info.textbook.note}
           </p>
-
           <p>
-            <strong>Academic Session:</strong>{" "}
-            {alQuran2027Info.academicSession}
+            <strong>Academic Session:</strong> {alQuran2027Info.academicSession}
           </p>
         </div>
 
@@ -290,12 +263,11 @@ export default function AlQuranDarsENizami2027Library({
           <p className="text-sm leading-6 text-orange-800 dark:text-orange-200">
             A specific prescribed book, edition, author and publisher
             have not been independently confirmed. The syllabus
-            mentions authentic Tafsir references.
+            mentions selection from an authentic Tafsir.
           </p>
         </div>
       </section>
 
-      {/* Official Source */}
       <section className="rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800/50">
         <h2 className="font-bold text-gray-900 dark:text-white">
           Official Syllabus Reference
@@ -307,16 +279,15 @@ export default function AlQuranDarsENizami2027Library({
         </p>
 
         <a
-          href="https://home.biselahore.com/downloads/notifications/misc/Syllabus_9th%2610th_%282025_27%29.pdf"
+          href={alQuran2027Info.sources.boardSyllabus}
           target="_blank"
           rel="noopener noreferrer"
           className="mt-4 inline-flex font-semibold text-emerald-700 underline underline-offset-4 hover:text-emerald-900 dark:text-emerald-300"
         >
-          View BISE Lahore Official Syllabus
+          View BISE Lahore Official Syllabus ↗
         </a>
       </section>
 
-      {/* Navigation */}
       <div>
         <Link
           href="/classes"

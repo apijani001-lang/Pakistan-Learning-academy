@@ -1,5 +1,6 @@
 
 import Link from "next/link";
+import EnglishChapter2027 from "@/components/EnglishChapter2027";
 import { connection } from "next/server";
 import { Suspense } from "react";
 import {
@@ -493,6 +494,24 @@ async function ChapterContent({ params }: PageProps) {
 
   const subjectUrl = `/classes/${classid}/${group}/board/${boardid}/${subject}`;
   const chapterTestUrl = `${subjectUrl}/${chapter}/test`;
+
+  const isEnglishChapterOne =
+    classid === "9" &&
+    (group === "science" || group === "arts") &&
+    subject === "english" &&
+    chapter === "chapter-1" &&
+    ["lahore", "gujranwala", "faisalabad", "multan", "rawalpindi", "sargodha", "bahawalpur", "dg-khan", "sahiwal"].includes(boardid);
+
+  if (isEnglishChapterOne) {
+    return (
+      <EnglishChapter2027
+        classid={classid}
+        group={group}
+        boardid={boardid}
+        chapter={chapter}
+      />
+    );
+  }
 
   const isChapterOne =
     classid === "9" &&

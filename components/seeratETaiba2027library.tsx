@@ -8,7 +8,6 @@ import {
 } from "@/data/class9-seerat-e-taiba-2027";
 
 import {
-  seeratETaiba2027Deletions,
   seeratETaiba2027DeletionSummary,
 } from "@/data/class9-seerat-e-taiba-2027-deletions";
 
@@ -17,6 +16,8 @@ export default function SeeratETaiba2027Library({
 }: {
   bookUrl?: string;
 }) {
+  const info = seeratETaiba2027Info;
+
   return (
     <main className="space-y-8">
       <section className="overflow-hidden rounded-3xl border border-emerald-200 bg-gradient-to-br from-emerald-50 via-white to-teal-50 p-6 shadow-sm dark:border-emerald-900/50 dark:from-emerald-950/30 dark:via-gray-900 dark:to-teal-950/20 sm:p-8">
@@ -24,11 +25,9 @@ export default function SeeratETaiba2027Library({
           <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200">
             CLASS 9
           </span>
-
           <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-300">
-            Annual Examination 2027
+            {info.examination}
           </span>
-
           <span className="rounded-full bg-purple-100 px-3 py-1 text-xs font-bold text-purple-800 dark:bg-purple-900/40 dark:text-purple-200">
             Dars-e-Nizami Group
           </span>
@@ -38,18 +37,14 @@ export default function SeeratETaiba2027Library({
           Seerat-e-Taiba
         </h1>
 
-        <p
-          className="mt-3 text-3xl font-bold text-emerald-800 dark:text-emerald-300"
-          dir="rtl"
-        >
-          سیرت طیبہ
+        <p className="mt-3 text-3xl font-bold text-emerald-800 dark:text-emerald-300" dir="rtl">
+          {info.subjectUrdu}
         </p>
 
         <p className="mt-4 max-w-3xl text-sm leading-7 text-gray-600 dark:text-gray-300">
           Class 9 Seerat-e-Taiba syllabus for the Dars-e-Nizami
           group, covering the available Seerat topics, character
-          headings and Hadith-related references for the
-          2026–27 academic session.
+          headings and Hadith-related references.
         </p>
 
         {bookUrl && (
@@ -59,8 +54,7 @@ export default function SeeratETaiba2027Library({
             rel="noopener noreferrer"
             className="mt-6 inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-5 py-3 text-sm font-bold text-white transition hover:bg-emerald-800"
           >
-            Open Reference Book
-            <span aria-hidden="true">↗</span>
+            Open Reference Book ↗
           </a>
         )}
       </section>
@@ -75,9 +69,8 @@ export default function SeeratETaiba2027Library({
             <p className="text-sm text-gray-500 dark:text-gray-400">
               Academic Session
             </p>
-
             <p className="mt-2 text-xl font-extrabold text-gray-900 dark:text-white">
-              {seeratETaiba2027Info.academicSession}
+              {info.academicSession}
             </p>
           </div>
 
@@ -85,9 +78,8 @@ export default function SeeratETaiba2027Library({
             <p className="text-sm text-gray-500 dark:text-gray-400">
               Examination
             </p>
-
             <p className="mt-2 text-lg font-extrabold text-gray-900 dark:text-white">
-              {seeratETaiba2027Info.examination}
+              {info.examination}
             </p>
           </div>
 
@@ -95,7 +87,6 @@ export default function SeeratETaiba2027Library({
             <p className="text-sm text-gray-500 dark:text-gray-400">
               Syllabus Sections
             </p>
-
             <p className="mt-2 text-xl font-extrabold text-gray-900 dark:text-white">
               {seeratETaibaSections2027.length}
             </p>
@@ -106,8 +97,7 @@ export default function SeeratETaiba2027Library({
           <p className="text-sm leading-7 text-orange-800 dark:text-orange-200">
             <strong>Marks and duration:</strong> A separate
             Class 9 marks distribution and examination duration
-            have not been independently verified from the
-            available subject syllabus pages. No unverified
+            have not been independently verified. No unverified
             figures are displayed.
           </p>
         </div>
@@ -118,10 +108,9 @@ export default function SeeratETaiba2027Library({
           <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white">
             Seerat-e-Taiba Syllabus
           </h2>
-
           <p className="mt-2 text-sm leading-6 text-gray-500 dark:text-gray-400">
             Available subject headings from the BISE Lahore
-            syllabus reference.
+            syllabus reference, pages {info.officialSyllabusPages}.
           </p>
         </div>
 
@@ -135,11 +124,7 @@ export default function SeeratETaiba2027Library({
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white">
                   {section.number}. {section.title}
                 </h3>
-
-                <p
-                  className="mt-2 text-lg leading-8 text-gray-700 dark:text-gray-300"
-                  dir="rtl"
-                >
+                <p className="mt-2 text-lg leading-8 text-gray-700 dark:text-gray-300" dir="rtl">
                   {section.titleUrdu}
                 </p>
               </div>
@@ -158,15 +143,11 @@ export default function SeeratETaiba2027Library({
                       <p className="text-sm font-semibold leading-6 text-gray-900 dark:text-white">
                         {topic.title}
                       </p>
-
-                      <p
-                        className="mt-1 text-base leading-7 text-gray-600 dark:text-gray-300"
-                        dir="rtl"
-                      >
+                      <p className="mt-1 text-base leading-7 text-gray-600 dark:text-gray-300" dir="rtl">
                         {topic.titleUrdu}
                       </p>
 
-                      {topic.details && (
+                      {topic.details && topic.details.length > 0 && (
                         <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-gray-600 dark:text-gray-400">
                           {topic.details.map((detail, index) => (
                             <li key={index}>{detail}</li>
@@ -188,10 +169,9 @@ export default function SeeratETaiba2027Library({
         </h2>
 
         <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-300">
-          The following English headings are supplementary
-          topic-level references. They are not presented as
-          a verified complete official Hadith list or as
-          complete Arabic Hadith texts.
+          These are supplementary English topic headings.
+          They are not presented as a verified complete official
+          Hadith list or as complete Arabic Hadith texts.
         </p>
 
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
@@ -203,7 +183,6 @@ export default function SeeratETaiba2027Library({
               <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-teal-100 text-xs font-bold text-teal-800 dark:bg-teal-900/50 dark:text-teal-200">
                 {index + 1}
               </span>
-
               <p className="text-sm font-medium leading-6 text-gray-800 dark:text-gray-200">
                 {heading}
               </p>
@@ -218,45 +197,23 @@ export default function SeeratETaiba2027Library({
         </h2>
 
         <div className="mt-4 space-y-3 text-sm">
-          <div className="flex items-center justify-between gap-3">
-            <span className="text-gray-700 dark:text-gray-300">
-              Official syllabus reference
-            </span>
-
-            <span className="font-bold text-emerald-700 dark:text-emerald-300">
-              Verified
-            </span>
-          </div>
-
-          <div className="flex items-center justify-between gap-3">
-            <span className="text-gray-700 dark:text-gray-300">
-              Original textbook visual check
-            </span>
-
-            <span className="font-bold text-orange-700 dark:text-orange-300">
-              Pending
-            </span>
-          </div>
-
-          <div className="flex items-center justify-between gap-3">
-            <span className="text-gray-700 dark:text-gray-300">
-              Separate marks scheme
-            </span>
-
-            <span className="font-bold text-orange-700 dark:text-orange-300">
-              Pending
-            </span>
-          </div>
-
-          <div className="flex items-center justify-between gap-3">
-            <span className="text-gray-700 dark:text-gray-300">
-              2027 ALP verification
-            </span>
-
-            <span className="font-bold text-orange-700 dark:text-orange-300">
-              Pending
-            </span>
-          </div>
+          {[
+            ["Official syllabus reference", info.verification.officialSyllabusPages],
+            ["Seerat topics", info.verification.seeratTopics],
+            ["Hadith headings", info.verification.hadithHeadings],
+            ["Original textbook visual check", info.verification.originalTextbookVisualCheck],
+            ["Separate marks scheme", info.verification.separateClass9MarksScheme],
+            ["2027 ALP verification", info.verification.alp2027],
+          ].map(([label, verified]) => (
+            <div key={String(label)} className="flex items-center justify-between gap-3">
+              <span className="text-gray-700 dark:text-gray-300">
+                {label}
+              </span>
+              <span className={`font-bold ${verified ? "text-emerald-700 dark:text-emerald-300" : "text-orange-700 dark:text-orange-300"}`}>
+                {verified ? "Verified" : "Pending"}
+              </span>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -272,30 +229,22 @@ export default function SeeratETaiba2027Library({
         <p className="mt-3 text-sm leading-7 text-gray-700 dark:text-gray-300">
           {seeratETaiba2027DeletionSummary.note}
         </p>
-
-        <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
-          Verified deletion entries:{" "}
-          <strong>{seeratETaiba2027Deletions.length}</strong>
-        </p>
       </section>
 
       <section className="rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800/50">
         <h2 className="font-bold text-gray-900 dark:text-white">
           Official Syllabus Reference
         </h2>
-
         <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">
-          This subject library references the BISE Lahore
-          Secondary School Syllabus 2025–2027, pages 70–71.
+          {info.syllabusSource}, pages {info.officialSyllabusPages}.
         </p>
-
         <a
-          href={seeratETaiba2027Info.source}
+          href={info.source}
           target="_blank"
           rel="noopener noreferrer"
           className="mt-4 inline-flex font-semibold text-emerald-700 underline underline-offset-4 hover:text-emerald-900 dark:text-emerald-300"
         >
-          View BISE Lahore Official Syllabus
+          View BISE Lahore Official Syllabus ↗
         </a>
       </section>
 

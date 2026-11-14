@@ -1,4 +1,3 @@
-// components/urduLiterature2027library.tsx
 
 import Link from "next/link";
 
@@ -12,13 +11,15 @@ import {
   urduLiterature2027DeletionSummary,
 } from "@/data/class9-urdu-literature-2027-deletions";
 
-type UrduLiterature2027LibraryProps = {
+type Props = {
   bookUrl?: string;
 };
 
 export default function UrduLiterature2027Library({
   bookUrl,
-}: UrduLiterature2027LibraryProps) {
+}: Props) {
+  const info = urduLiterature2027Info;
+
   const class9Section = urduLiteratureSections2027.find(
     (section) => section.class === 9
   );
@@ -31,37 +32,31 @@ export default function UrduLiterature2027Library({
 
   return (
     <main className="space-y-8">
-      {/* Header */}
-      <section className="overflow-hidden rounded-3xl border border-purple-200 bg-gradient-to-br from-purple-50 via-white to-fuchsia-50 p-6 shadow-sm dark:border-purple-900/50 dark:from-purple-950/30 dark:via-gray-900 dark:to-fuchsia-950/20 sm:p-8">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="rounded-full bg-purple-100 px-3 py-1 text-xs font-bold text-purple-800 dark:bg-purple-900/50 dark:text-purple-200">
+      <section className="overflow-hidden rounded-3xl bg-gradient-to-br from-purple-950 via-fuchsia-950 to-slate-950 p-6 text-white shadow-xl sm:p-9">
+        <div className="flex flex-wrap gap-2">
+          <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold">
             CLASS 9
           </span>
-
-          <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-300">
-            Annual Examination 2027
+          <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold">
+            {info.academicSession}
           </span>
-
-          <span className="rounded-full bg-fuchsia-100 px-3 py-1 text-xs font-bold text-fuchsia-800 dark:bg-fuchsia-900/40 dark:text-fuchsia-200">
-            Elective Subject
+          <span className="rounded-full bg-fuchsia-300/20 px-3 py-1 text-xs font-bold text-fuchsia-100">
+            ARTS / HUMANITIES
           </span>
         </div>
 
-        <h1 className="mt-5 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-          Urdu Literature
+        <h1 className="mt-5 text-3xl font-extrabold sm:text-4xl">
+          {info.subject}
         </h1>
 
-        <p
-          className="mt-3 text-3xl font-bold text-purple-800 dark:text-purple-300"
-          dir="rtl"
-        >
-          اردو اختیاری
+        <p className="mt-3 text-3xl font-bold text-fuchsia-200" dir="rtl">
+          {info.subjectUrdu}
         </p>
 
-        <p className="mt-4 max-w-3xl text-sm leading-7 text-gray-600 dark:text-gray-300">
-          Class 9 Urdu Literature syllabus information, prose, poetry,
-          ghazal, literary topics and examination guidance for the
-          2026–27 academic session.
+        <p className="mt-4 max-w-3xl text-sm leading-7 text-purple-100">
+          Class 9 Urdu Literature: prose, poetry, ghazal,
+          literary terminology and prescribed textbook
+          selections for Annual Examination 2027.
         </p>
 
         {bookUrl && (
@@ -69,65 +64,54 @@ export default function UrduLiterature2027Library({
             href={bookUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-purple-700 px-5 py-3 text-sm font-bold text-white transition hover:bg-purple-800"
+            className="mt-6 inline-flex rounded-xl bg-white px-5 py-3 text-sm font-bold text-purple-950 transition hover:bg-purple-50"
           >
-            Open Textbook
-            <span aria-hidden="true">↗</span>
+            Open Complete Textbook ↗
           </a>
         )}
       </section>
 
-      {/* Examination Information */}
       <section>
-        <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
-          Examination Information
+        <h2 className="mb-4 text-xl font-extrabold text-gray-900 dark:text-white">
+          Class 9 Examination Information
         </h2>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            {
-              label: "Class IX Marks",
-              value: String(urduLiterature2027Info.partI.marks),
-            },
-            {
-              label: "Exam Duration",
-              value: urduLiterature2027Info.partI.duration,
-            },
-            {
-              label: "Class IX Entries",
-              value: String(class9Entries.length),
-            },
-            {
-              label: "Combined Book Parts",
-              value: String(urduLiterature2027Info.totalParts),
-            },
-          ].map((item) => (
+            ["Class 9 Marks", String(info.partI.marks)],
+            ["Paper Duration", info.partI.duration],
+            ["Literary Entries", String(class9Entries.length)],
+            ["Combined Book Parts", String(info.totalParts)],
+          ].map(([label, value]) => (
             <div
-              key={item.label}
+              key={label}
               className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-900"
             >
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                {item.label}
+                {label}
               </p>
-
-              <p className="mt-2 text-xl font-extrabold text-gray-900 dark:text-white">
-                {item.value}
+              <p className="mt-2 text-xl font-extrabold text-purple-700 dark:text-purple-300">
+                {value}
               </p>
             </div>
           ))}
         </div>
+
+        <p className="mt-3 text-xs leading-6 text-gray-500 dark:text-gray-400">
+          Class 9 Part-I and Class 10 Part-II are separate
+          examination components of the combined textbook.
+        </p>
       </section>
 
-      {/* Class 9 Literature */}
       <section>
         <div className="mb-5">
           <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white">
-            Class 9 Literature
+            Class 9 Prescribed Literature
           </h2>
-
           <p className="mt-2 text-sm leading-6 text-gray-500 dark:text-gray-400">
-            Part-I literary selections and page references listed in
-            the BISE Lahore syllabus.
+            These six entries are listed in the Class IX
+            Part-I syllabus. Original textbook visual
+            verification is still pending for some titles.
           </p>
         </div>
 
@@ -135,26 +119,25 @@ export default function UrduLiterature2027Library({
           {class9Entries.map((entry) => (
             <article
               key={`${entry.class}-${entry.number}`}
-              className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-purple-300 dark:border-gray-700 dark:bg-gray-900 dark:hover:border-purple-700"
+              className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-900"
             >
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-100 font-extrabold text-purple-800 dark:bg-purple-900/40 dark:text-purple-300">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div className="flex items-start gap-3">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-purple-100 font-extrabold text-purple-800 dark:bg-purple-900/40 dark:text-purple-200">
                     {entry.number}
                   </span>
 
                   <div>
-                    <h3 className="font-bold text-gray-900 dark:text-white">
+                    <span className="text-xs font-bold uppercase tracking-wider text-purple-700 dark:text-purple-300">
+                      {entry.genre}
+                    </span>
+                    <h3 className="mt-1 font-bold text-gray-900 dark:text-white">
                       {entry.title}
                     </h3>
-
-                    <p className="mt-1 text-xs font-medium text-purple-700 dark:text-purple-300">
-                      {entry.genre}
-                    </p>
                   </div>
                 </div>
 
-                <span className="rounded-lg bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-300">
+                <span className="rounded-lg bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-700 dark:bg-gray-800 dark:text-gray-300">
                   Page {entry.pages}
                 </span>
               </div>
@@ -167,8 +150,8 @@ export default function UrduLiterature2027Library({
               </p>
 
               {entry.verificationNote && (
-                <p className="mt-3 rounded-xl bg-orange-50 p-3 text-xs leading-6 text-orange-800 dark:bg-orange-950/30 dark:text-orange-200">
-                  Verification note: {entry.verificationNote}
+                <p className="mt-3 rounded-xl bg-amber-50 p-3 text-xs leading-6 text-amber-900 dark:bg-amber-950/30 dark:text-amber-200">
+                  Verification: {entry.verificationNote}
                 </p>
               )}
             </article>
@@ -176,18 +159,17 @@ export default function UrduLiterature2027Library({
         </div>
       </section>
 
-      {/* Literary Topics */}
       {class9Section?.additionalTopics &&
         class9Section.additionalTopics.length > 0 && (
           <section className="rounded-2xl border border-purple-200 bg-purple-50/60 p-5 dark:border-purple-900/50 dark:bg-purple-950/20">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-              Literary & Rhetorical Topics
+            <h2 className="text-xl font-extrabold text-gray-900 dark:text-white">
+              Literary and Rhetorical Topics
             </h2>
 
-            <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">
-              The following literary terms are listed in the syllabus
-              reference. Their exact textbook coverage should be
-              cross-checked before final publication.
+            <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-300">
+              These literary terms are listed in the Class 9
+              syllabus. Their detailed textbook explanations
+              can be added after original book verification.
             </p>
 
             <div className="mt-4 flex flex-wrap gap-2">
@@ -203,108 +185,105 @@ export default function UrduLiterature2027Library({
           </section>
         )}
 
-      {/* Class 10 Reference */}
       {class10Section && (
         <section className="rounded-2xl border border-blue-200 bg-blue-50/60 p-5 dark:border-blue-900/50 dark:bg-blue-950/20">
-          <h2 className="text-lg font-bold text-gray-900 dark:text-white">
+          <h2 className="text-lg font-extrabold text-gray-900 dark:text-white">
             Class 10 — Part-II Reference
           </h2>
 
-          <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">
-            The combined textbook also contains a separate Class 10
-            section. It is not included in the Class 9 examination
-            list above.
+          <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-300">
+            The combined textbook contains a separate Class 10
+            section. These entries are not included in the
+            Class 9 examination list above.
           </p>
 
-          <p className="mt-3 text-sm font-semibold text-blue-800 dark:text-blue-300">
-            {class10Section.entries.length} reference entries are
-            recorded for Part-II.
+          <p className="mt-3 font-bold text-blue-800 dark:text-blue-300">
+            {class10Section.entries.length} Class 10 entries ·
+            {` ${class10Section.marks} marks`}
           </p>
         </section>
       )}
 
-      {/* ALP Status */}
-      <section className="rounded-2xl border border-orange-200 bg-orange-50/70 p-5 dark:border-orange-900/50 dark:bg-orange-950/20">
-        <h2 className="text-lg font-bold text-gray-900 dark:text-white">
-          2027 ALP & Deletion Status
+      <section className="rounded-2xl border border-amber-200 bg-amber-50 p-5 dark:border-amber-900/50 dark:bg-amber-950/20">
+        <h2 className="text-lg font-extrabold text-amber-950 dark:text-amber-200">
+          2027 ALP and Deletion Status
         </h2>
 
-        <span className="mt-3 inline-flex rounded-full bg-orange-100 px-3 py-1 text-xs font-bold text-orange-800 dark:bg-orange-900/50 dark:text-orange-200">
-          Verification Pending
-        </span>
-
-        <p className="mt-3 text-sm leading-7 text-gray-700 dark:text-gray-300">
+        <p className="mt-3 text-sm leading-7 text-amber-900 dark:text-amber-100">
           {urduLiterature2027DeletionSummary.note}
         </p>
 
-        <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
-          Verified deletion entries:{" "}
-          <strong>{urduLiterature2027Deletions.length}</strong>
+        <p className="mt-3 text-sm font-bold text-amber-900 dark:text-amber-200">
+          {urduLiterature2027DeletionSummary.status}
+        </p>
+
+        <p className="mt-3 text-sm text-amber-900 dark:text-amber-100">
+          Verified deletion entries: {urduLiterature2027Deletions.length}
         </p>
       </section>
 
-      {/* Textbook Details */}
       <section className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-900">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-          Prescribed Textbook
+        <h2 className="text-xl font-extrabold text-gray-900 dark:text-white">
+          Prescribed Textbook Information
         </h2>
 
         <div className="mt-4 space-y-3 text-sm leading-7 text-gray-700 dark:text-gray-300">
-          <p>
-            <strong>Book:</strong>{" "}
-            {urduLiterature2027Info.textbookTitle}
+          <p><strong>Book:</strong> {info.textbookTitle}</p>
+
+          <p className="text-lg" dir="rtl">
+            {info.textbookUrduTitle}
           </p>
 
-          <p dir="rtl" className="text-lg">
-            {urduLiterature2027Info.textbookUrduTitle}
-          </p>
-
-          <p>
-            <strong>Authors:</strong>{" "}
-            {urduLiterature2027Info.authors}
-          </p>
-
-          <p>
-            <strong>Publisher:</strong>{" "}
-            {urduLiterature2027Info.publisher}
-          </p>
-
-          <p>
-            <strong>Medium:</strong>{" "}
-            {urduLiterature2027Info.medium}
-          </p>
-
-          <p>
-            <strong>Academic Session:</strong>{" "}
-            {urduLiterature2027Info.academicSession}
-          </p>
+          <p><strong>Authors:</strong> {info.authors}</p>
+          <p><strong>Publisher:</strong> {info.publisher}</p>
+          <p><strong>Medium:</strong> {info.medium}</p>
+          <p><strong>Edition:</strong> {info.textbookEdition}</p>
+          <p><strong>Academic Session:</strong> {info.academicSession}</p>
         </div>
       </section>
 
-      {/* Official Source */}
       <section className="rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800/50">
-        <h2 className="font-bold text-gray-900 dark:text-white">
-          Official Syllabus Reference
+        <h2 className="font-extrabold text-gray-900 dark:text-white">
+          Official Syllabus and Book References
         </h2>
 
-        <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">
-          Examination marks, duration and prescribed book information
-          are based on the BISE Lahore 2025–2027 syllabus. Individual
-          literary titles and original textbook pages still require
-          visual verification.
+        <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-300">
+          Examination marks, duration and prescribed book
+          information are based on the BISE Lahore 2025–2027
+          syllabus. Some individual literary titles still
+          require original textbook visual verification.
         </p>
 
-        <a
-          href="https://home.biselahore.com/downloads/notifications/misc/Syllabus_9th%2610th_%282025_27%29.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-4 inline-flex font-semibold text-purple-700 underline underline-offset-4 hover:text-purple-900 dark:text-purple-300"
-        >
-          View BISE Lahore Official Syllabus
-        </a>
+        <div className="mt-4 flex flex-col items-start gap-3 text-sm font-bold">
+          <a
+            href={info.sources.boardSyllabus}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-purple-700 underline underline-offset-4 dark:text-purple-300"
+          >
+            BISE Lahore Official Syllabus ↗
+          </a>
+
+          <a
+            href={info.sources.officialBooks}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-purple-700 underline underline-offset-4 dark:text-purple-300"
+          >
+            PECTAA Official Books ↗
+          </a>
+
+          <a
+            href={info.sources.officialCurriculum}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-purple-700 underline underline-offset-4 dark:text-purple-300"
+          >
+            PECTAA Curriculum and Compliance ↗
+          </a>
+        </div>
       </section>
 
-      {/* Navigation */}
       <div>
         <Link
           href="/classes"

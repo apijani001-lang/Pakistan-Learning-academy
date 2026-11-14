@@ -1,6 +1,3 @@
-// components/commercialgeography2027library.tsx
-
-import Link from "next/link";
 
 import {
   commercialGeography2027Info,
@@ -12,13 +9,15 @@ import {
   commercialGeography2027DeletionSummary,
 } from "@/data/class9-commercial-geography-2027-deletions";
 
-type CommercialGeography2027LibraryProps = {
+type Props = {
   bookUrl?: string;
 };
 
 export default function CommercialGeography2027Library({
   bookUrl,
-}: CommercialGeography2027LibraryProps) {
+}: Props) {
+  const info = commercialGeography2027Info;
+
   const class9Sections = commercialGeographySections2027.filter(
     (section) => section.class === 9
   );
@@ -29,37 +28,31 @@ export default function CommercialGeography2027Library({
 
   return (
     <main className="space-y-8">
-      {/* Header */}
-      <section className="overflow-hidden rounded-3xl border border-cyan-200 bg-gradient-to-br from-cyan-50 via-white to-blue-50 p-6 shadow-sm dark:border-cyan-900/50 dark:from-cyan-950/30 dark:via-gray-900 dark:to-blue-950/20 sm:p-8">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="rounded-full bg-cyan-100 px-3 py-1 text-xs font-bold text-cyan-800 dark:bg-cyan-900/50 dark:text-cyan-200">
+      <section className="overflow-hidden rounded-3xl border border-cyan-200 bg-gradient-to-br from-cyan-950 via-blue-950 to-slate-950 p-6 text-white shadow-xl sm:p-8">
+        <div className="flex flex-wrap gap-2">
+          <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold">
             CLASS 9
           </span>
-
-          <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-300">
-            Annual Examination 2027
+          <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold">
+            SESSION {info.academicSession}
           </span>
-
-          <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-bold text-blue-800 dark:bg-blue-900/40 dark:text-blue-200">
-            Elective Subject
+          <span className="rounded-full bg-cyan-300/20 px-3 py-1 text-xs font-bold">
+            ARTS / HUMANITIES
           </span>
         </div>
 
-        <h1 className="mt-5 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-          Commercial Geography
+        <h1 className="mt-5 text-3xl font-extrabold sm:text-4xl">
+          {info.subject}
         </h1>
 
-        <p
-          className="mt-3 text-3xl font-bold text-cyan-800 dark:text-cyan-300"
-          dir="rtl"
-        >
-          تجارتی جغرافیہ
+        <p className="mt-3 text-3xl font-bold text-cyan-200" dir="rtl">
+          {info.subjectUrdu}
         </p>
 
-        <p className="mt-4 max-w-3xl text-sm leading-7 text-gray-600 dark:text-gray-300">
-          Class 9 Commercial Geography syllabus, commercial resources,
-          agricultural production, trade and examination guidance
-          for the 2026–27 academic session.
+        <p className="mt-4 max-w-3xl text-sm leading-7 text-cyan-100">
+          Class 9 Commercial Geography syllabus, commercial
+          resources, agricultural production, trade and
+          geographical concepts for Annual Examination 2027.
         </p>
 
         {bookUrl && (
@@ -67,37 +60,31 @@ export default function CommercialGeography2027Library({
             href={bookUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-cyan-700 px-5 py-3 text-sm font-bold text-white transition hover:bg-cyan-800"
+            className="mt-6 inline-flex rounded-xl bg-white px-5 py-3 text-sm font-bold text-cyan-950 transition hover:bg-cyan-50"
           >
-            Open Textbook
-            <span aria-hidden="true">↗</span>
+            Open Complete Textbook ↗
           </a>
         )}
       </section>
 
-      {/* Examination Information */}
       <section>
-        <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
-          Examination Information
+        <h2 className="mb-4 text-xl font-extrabold text-gray-900 dark:text-white">
+          Class 9 Examination Information
         </h2>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {[
             {
-              label: "Class IX Marks",
-              value: String(commercialGeography2027Info.partI.marks),
+              label: "Class 9 Marks",
+              value: `${info.partI.marks}`,
             },
             {
-              label: "Exam Duration",
-              value: commercialGeography2027Info.partI.duration,
+              label: "Paper Duration",
+              value: info.partI.duration,
             },
             {
-              label: "Class IX Sections",
-              value: String(class9Sections.length),
-            },
-            {
-              label: "Combined Book Sections",
-              value: String(commercialGeography2027Info.totalSections),
+              label: "Class 9 Sections",
+              value: `${class9Sections.length}`,
             },
           ].map((item) => (
             <div
@@ -107,25 +94,28 @@ export default function CommercialGeography2027Library({
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 {item.label}
               </p>
-
-              <p className="mt-2 text-xl font-extrabold text-gray-900 dark:text-white">
+              <p className="mt-2 text-2xl font-extrabold text-gray-900 dark:text-white">
                 {item.value}
               </p>
             </div>
           ))}
         </div>
+
+        <p className="mt-3 text-xs leading-6 text-gray-500 dark:text-gray-400">
+          Examination details are based on the BISE Lahore
+          2025–2027 syllabus reference.
+        </p>
       </section>
 
-      {/* Class 9 Sections */}
       <section>
         <div className="mb-5">
           <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white">
             Class 9 Complete Syllabus
           </h2>
-
           <p className="mt-2 text-sm leading-6 text-gray-500 dark:text-gray-400">
-            Part-I sections according to the BISE Lahore 2025–2027
-            syllabus.
+            These five sections belong to Class IX Part-I.
+            Their listed topics are transcribed from the
+            board syllabus.
           </p>
         </div>
 
@@ -133,12 +123,12 @@ export default function CommercialGeography2027Library({
           {class9Sections.map((section) => (
             <article
               key={section.number}
-              className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:border-cyan-300 dark:border-gray-700 dark:bg-gray-900 dark:hover:border-cyan-700"
+              className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-900"
             >
               <div className="flex items-start gap-4 p-5">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-cyan-100 font-extrabold text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-300">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-cyan-100 font-extrabold text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-200">
                   {section.number}
-                </div>
+                </span>
 
                 <div className="min-w-0 flex-1">
                   <h3 className="font-bold leading-6 text-gray-900 dark:text-white">
@@ -163,134 +153,142 @@ export default function CommercialGeography2027Library({
                   Topics
                 </h4>
 
-                <div className="flex flex-wrap gap-2">
+                <ul className="grid gap-2 sm:grid-cols-2">
                   {section.topics.map((topic, index) => (
-                    <span
+                    <li
                       key={`${section.number}-${index}`}
-                      className="rounded-lg bg-cyan-50 px-3 py-2 text-xs font-medium text-cyan-900 dark:bg-cyan-950/40 dark:text-cyan-200"
+                      className="rounded-lg bg-cyan-50 px-3 py-2 text-sm text-cyan-950 dark:bg-cyan-950/40 dark:text-cyan-100"
                     >
                       {topic}
-                    </span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             </article>
           ))}
         </div>
       </section>
 
-      {/* Class 10 Reference */}
       <section className="rounded-2xl border border-blue-200 bg-blue-50/60 p-5 dark:border-blue-900/50 dark:bg-blue-950/20">
-        <h2 className="text-lg font-bold text-gray-900 dark:text-white">
+        <h2 className="text-lg font-extrabold text-gray-900 dark:text-white">
           Class 10 — Part-II Reference
         </h2>
 
-        <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">
-          The combined IX–X textbook also includes a separate Class 10
-          section. These sections are not included in the Class 9
-          examination list above.
+        <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-300">
+          The combined IX–X textbook contains a separate
+          Class 10 section. These sections are not included
+          in the Class 9 examination list above.
         </p>
 
-        <p className="mt-3 text-sm font-semibold text-blue-800 dark:text-blue-300">
-          {class10Sections.length} sections belong to Class 10.
+        <p className="mt-3 font-bold text-blue-800 dark:text-blue-300">
+          {class10Sections.length} Class 10 sections ·
+          {` ${info.partII.marks} marks`}
         </p>
       </section>
 
-      {/* ALP Status */}
-      <section className="rounded-2xl border border-orange-200 bg-orange-50/70 p-5 dark:border-orange-900/50 dark:bg-orange-950/20">
-        <h2 className="text-lg font-bold text-gray-900 dark:text-white">
-          2027 ALP & Deletion Status
+      <section className="rounded-2xl border border-amber-200 bg-amber-50 p-5 dark:border-amber-900/50 dark:bg-amber-950/20">
+        <h2 className="text-lg font-extrabold text-amber-950 dark:text-amber-200">
+          2027 Smart Syllabus & Deletion Status
         </h2>
 
-        <span className="mt-3 inline-flex rounded-full bg-orange-100 px-3 py-1 text-xs font-bold text-orange-800 dark:bg-orange-900/50 dark:text-orange-200">
-          Verification Pending
-        </span>
-
-        <p className="mt-3 text-sm leading-7 text-gray-700 dark:text-gray-300">
+        <p className="mt-3 text-sm leading-7 text-amber-900 dark:text-amber-100">
           {commercialGeography2027DeletionSummary.note}
         </p>
 
-        <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
+        <p className="mt-3 text-sm font-bold text-amber-900 dark:text-amber-200">
+          {commercialGeography2027DeletionSummary.status}
+        </p>
+
+        <p className="mt-3 text-sm text-amber-900 dark:text-amber-100">
           Verified deletion entries:{" "}
-          <strong>{commercialGeography2027Deletions.length}</strong>
+          {commercialGeography2027Deletions.length}
+        </p>
+
+        <p className="mt-3 text-sm leading-7 text-amber-900 dark:text-amber-100">
+          No section, topic, agricultural product, mineral
+          resource or commercial activity has been marked
+          deleted without official confirmation.
         </p>
       </section>
 
-      {/* Textbook Details */}
       <section className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-900">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-          Prescribed Textbook
+        <h2 className="text-xl font-extrabold text-gray-900 dark:text-white">
+          Prescribed Textbook Information
         </h2>
 
         <div className="mt-4 space-y-3 text-sm leading-7 text-gray-700 dark:text-gray-300">
           <p>
-            <strong>Book:</strong>{" "}
-            {commercialGeography2027Info.textbookTitle}
+            <strong>Book:</strong> {info.textbookTitle}
           </p>
 
           <p dir="rtl" className="text-lg">
-            {commercialGeography2027Info.textbookUrduTitle}
+            {info.textbookUrduTitle}
           </p>
 
           <div>
             <strong>Authors:</strong>
-
             <ul className="mt-2 list-inside list-disc">
-              {commercialGeography2027Info.authors.map((author) => (
+              {info.authors.map((author) => (
                 <li key={author}>{author}</li>
               ))}
             </ul>
           </div>
 
           <p>
-            <strong>Publisher:</strong>{" "}
-            {commercialGeography2027Info.publisher}
+            <strong>Publisher:</strong> {info.publisher}
           </p>
-
           <p>
-            <strong>Medium:</strong>{" "}
-            {commercialGeography2027Info.medium}
+            <strong>Medium:</strong> {info.medium}
           </p>
-
           <p>
-            <strong>Academic Session:</strong>{" "}
-            {commercialGeography2027Info.academicSession}
+            <strong>Edition:</strong> {info.textbookEdition}
+          </p>
+          <p>
+            <strong>Academic Session:</strong> {info.academicSession}
           </p>
         </div>
       </section>
 
-      {/* Official Source */}
       <section className="rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800/50">
-        <h2 className="font-bold text-gray-900 dark:text-white">
-          Official Syllabus Reference
+        <h2 className="font-extrabold text-gray-900 dark:text-white">
+          Official Syllabus & Book References
         </h2>
 
-        <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">
-          The Class IX and Class X section sequence and examination
-          scheme are based on the BISE Lahore 2025–2027 syllabus.
-          Original textbook visual verification and subject-specific
-          2027 ALP verification remain pending.
+        <div className="mt-4 flex flex-col items-start gap-3 text-sm font-bold">
+          <a
+            href={info.sources.boardSyllabus}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-cyan-700 underline underline-offset-4 dark:text-cyan-300"
+          >
+            BISE Lahore Official Syllabus ↗
+          </a>
+
+          <a
+            href={info.sources.officialBooks}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-cyan-700 underline underline-offset-4 dark:text-cyan-300"
+          >
+            PECTAA Official Books ↗
+          </a>
+
+          <a
+            href={info.sources.officialCurriculum}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-cyan-700 underline underline-offset-4 dark:text-cyan-300"
+          >
+            PECTAA Curriculum & Compliance ↗
+          </a>
+        </div>
+
+        <p className="mt-5 text-xs leading-6 text-gray-500 dark:text-gray-400">
+          Original textbook page-by-page visual verification
+          is still pending. The syllabus sections and listed
+          topics are based on the board syllabus source.
         </p>
-
-        <a
-          href="https://home.biselahore.com/downloads/notifications/misc/Syllabus_9th%2610th_%282025_27%29.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-4 inline-flex font-semibold text-cyan-700 underline underline-offset-4 hover:text-cyan-900 dark:text-cyan-300"
-        >
-          View BISE Lahore Official Syllabus
-        </a>
       </section>
-
-      {/* Navigation */}
-      <div>
-        <Link
-          href="/classes"
-          className="inline-flex rounded-xl bg-gray-900 px-5 py-3 text-sm font-bold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
-        >
-          Back to Classes
-        </Link>
-      </div>
     </main>
   );
 }

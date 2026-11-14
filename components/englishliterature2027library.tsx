@@ -1,4 +1,5 @@
-﻿"use client";
+﻿
+"use client";
 
 import Link from "next/link";
 
@@ -23,33 +24,45 @@ export default function EnglishLiterature2027Library({
 
   return (
     <main className="space-y-6">
-      {/* Header */}
-      <section className="rounded-3xl border border-purple-200 bg-gradient-to-br from-purple-50 via-white to-indigo-50 p-6 dark:border-purple-900 dark:from-purple-950/40 dark:via-gray-950 dark:to-indigo-950/40">
-        <div className="mb-4 flex flex-wrap items-center gap-2">
-          <span className="rounded-full bg-purple-100 px-3 py-1 text-xs font-semibold text-purple-700 dark:bg-purple-900 dark:text-purple-200">
-            Class 9
+      <section className="overflow-hidden rounded-3xl border border-purple-200 bg-gradient-to-br from-purple-950 via-indigo-950 to-slate-950 p-6 text-white shadow-xl sm:p-8">
+        <div className="flex flex-wrap gap-2">
+          <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold">
+            CLASS 9
           </span>
-
-          <span className="rounded-full bg-indigo-100 px-3 py-1 text-xs font-semibold text-indigo-700 dark:bg-indigo-900 dark:text-indigo-200">
-            Arts / Humanities
+          <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold">
+            {info.group}
           </span>
-
-          <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700 dark:bg-green-900 dark:text-green-200">
-            Annual 2027
+          <span className="rounded-full bg-green-300/20 px-3 py-1 text-xs font-bold text-green-100">
+            ANNUAL EXAMINATION 2027
           </span>
         </div>
 
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-          English Literature Library
-        </h2>
+        <h1 className="mt-5 text-3xl font-extrabold sm:text-4xl">
+          {info.subject}
+        </h1>
 
-        <p className="mt-3 max-w-3xl text-sm leading-7 text-gray-600 dark:text-gray-300">
-          Class 9 English Literature syllabus, prescribed literary works and
-          examination information for the 2026–27 academic session.
+        <p className="mt-3 text-3xl font-bold text-purple-200" dir="rtl">
+          {info.subjectUrdu}
         </p>
+
+        <p className="mt-4 max-w-3xl text-sm leading-7 text-indigo-100">
+          Class 9 English Literature prescribed poetry,
+          short stories and drama for the 2026–27 academic
+          session.
+        </p>
+
+        {bookUrl && (
+          <a
+            href={bookUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex rounded-xl bg-white px-5 py-3 text-sm font-bold text-purple-950 transition hover:bg-purple-50"
+          >
+            Open Textbook ↗
+          </a>
+        )}
       </section>
 
-      {/* Overview */}
       <section className="grid gap-4 sm:grid-cols-3">
         {[
           {
@@ -72,38 +85,41 @@ export default function EnglishLiterature2027Library({
             <p className="text-sm text-gray-500 dark:text-gray-400">
               {item.label}
             </p>
-
-            <p className="mt-2 text-2xl font-bold text-purple-700 dark:text-purple-300">
+            <p className="mt-2 text-2xl font-extrabold text-purple-700 dark:text-purple-300">
               {item.value}
             </p>
           </div>
         ))}
       </section>
 
-      {/* Prescribed Books */}
-      <section className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
-        <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+      <section>
+        <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white">
           Prescribed Books and Literary Works
-        </h3>
+        </h2>
 
-        <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-          Official BISE Lahore syllabus references.
+        <p className="mt-2 text-sm leading-7 text-gray-500 dark:text-gray-400">
+          These three prescribed works are identified in the
+          BISE Lahore 2025–2027 syllabus.
         </p>
 
         <div className="mt-5 space-y-4">
           {info.prescribedBooks.map((book, index) => (
-            <div
+            <article
               key={`${book.title}-${index}`}
-              className="rounded-xl border border-gray-100 p-4 dark:border-gray-800"
+              className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-900"
             >
-              <div className="flex flex-col justify-between gap-3 sm:flex-row">
-                <div>
-                  <p className="font-bold text-gray-900 dark:text-white">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div className="min-w-0 flex-1">
+                  <span className="text-xs font-bold uppercase tracking-wider text-purple-600 dark:text-purple-300">
+                    Prescribed Work {index + 1}
+                  </span>
+
+                  <h3 className="mt-2 text-lg font-extrabold text-gray-900 dark:text-white">
                     {book.title}
-                  </p>
+                  </h3>
 
                   {"author" in book && book.author && (
-                    <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
                       Author: {book.author}
                     </p>
                   )}
@@ -112,18 +128,18 @@ export default function EnglishLiterature2027Library({
                     Publisher: {book.publisher}
                   </p>
 
-                  <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Coverage: {book.coverage}
+                  <p className="mt-2 text-sm leading-6 text-gray-700 dark:text-gray-300">
+                    <strong>Coverage:</strong> {book.coverage}
                   </p>
                 </div>
 
                 {book.syllabusShare && (
-                  <span className="h-fit w-fit rounded-lg bg-purple-100 px-3 py-2 text-xs font-bold text-purple-700 dark:bg-purple-900 dark:text-purple-200">
+                  <span className="rounded-lg bg-purple-100 px-3 py-2 text-xs font-bold text-purple-800 dark:bg-purple-900/40 dark:text-purple-200">
                     {book.syllabusShare}
                   </span>
                 )}
               </div>
-            </div>
+            </article>
           ))}
         </div>
 
@@ -132,111 +148,118 @@ export default function EnglishLiterature2027Library({
             href={bookUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-5 inline-flex rounded-xl bg-purple-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-purple-700"
+            className="mt-5 inline-flex rounded-xl bg-purple-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-purple-700"
           >
-            Open Textbook
+            Open Complete Textbook ↗
           </a>
         ) : (
-          <p className="mt-4 rounded-xl bg-amber-50 p-3 text-sm text-amber-800 dark:bg-amber-950/30 dark:text-amber-300">
-            Original prescribed books have not yet been visually verified.
-            Individual book download links are therefore not provided.
+          <p className="mt-5 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-900 dark:border-amber-900 dark:bg-amber-950/30 dark:text-amber-200">
+            Individual original book download links are not
+            provided because the prescribed books have not
+            yet been visually verified.
           </p>
         )}
       </section>
 
-      {/* Sections */}
-      <section className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
-        <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+      <section className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900">
+        <h2 className="text-xl font-extrabold text-gray-900 dark:text-white">
           Class 9 Literature Sections
-        </h3>
+        </h2>
 
         <div className="mt-5 space-y-4">
           {englishLiterature2027Sections.map((section, index) => (
-            <div
+            <article
               key={`${section.title}-${index}`}
               className="rounded-xl border border-gray-100 p-5 dark:border-gray-800"
             >
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <h4 className="font-bold text-gray-900 dark:text-white">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h3 className="font-bold text-gray-900 dark:text-white">
                   {index + 1}. {section.title}
-                </h4>
+                </h3>
 
                 {section.syllabusShare && (
-                  <span className="rounded-lg bg-indigo-100 px-3 py-1 text-xs font-semibold text-indigo-700 dark:bg-indigo-900 dark:text-indigo-200">
+                  <span className="rounded-lg bg-indigo-100 px-3 py-1 text-xs font-bold text-indigo-800 dark:bg-indigo-900/40 dark:text-indigo-200">
                     {section.syllabusShare}
                   </span>
                 )}
               </div>
 
-              <p className="mt-3 text-sm text-gray-700 dark:text-gray-300">
+              <p className="mt-3 text-sm leading-6 text-gray-700 dark:text-gray-300">
                 <strong>Prescribed Work:</strong>{" "}
                 {section.prescribedWork}
               </p>
 
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+              <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">
                 <strong>Coverage:</strong> {section.coverage}
               </p>
-            </div>
+            </article>
           ))}
         </div>
       </section>
 
-      {/* Deletion Status */}
-      <section className="rounded-2xl border border-amber-200 bg-amber-50 p-6 dark:border-amber-900 dark:bg-amber-950/20">
-        <h3 className="text-xl font-bold text-amber-900 dark:text-amber-200">
+      <section className="rounded-2xl border border-amber-200 bg-amber-50 p-5 dark:border-amber-900 dark:bg-amber-950/20">
+        <h2 className="text-xl font-extrabold text-amber-950 dark:text-amber-200">
           2027 ALP / Deleted Content Status
-        </h3>
+        </h2>
 
-        <p className="mt-3 text-sm leading-7 text-amber-900 dark:text-amber-200">
+        <p className="mt-3 text-sm leading-7 text-amber-900 dark:text-amber-100">
           {englishLiterature2027DeletionSummary.note}
         </p>
 
         <div className="mt-4 rounded-xl bg-white/70 p-4 dark:bg-gray-900/60">
-          <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">
+          <p className="text-sm font-bold text-gray-800 dark:text-gray-200">
             Verified deleted items: {englishLiterature2027Deletions.length}
           </p>
 
-          <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
-            No poem, story or play content has been marked deleted without
-            official confirmation.
+          <p className="mt-2 text-xs leading-6 text-gray-600 dark:text-gray-400">
+            No poem, short story, play scene or literary topic
+            has been marked deleted without official confirmation.
           </p>
         </div>
       </section>
 
-      {/* Verification */}
-      <section className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
-        <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+      <section className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900">
+        <h2 className="text-lg font-extrabold text-gray-900 dark:text-white">
           Content Verification
-        </h3>
+        </h2>
 
-        <ul className="mt-4 space-y-2 text-sm text-gray-700 dark:text-gray-300">
-          <li>✓ Official board syllabus checked</li>
+        <ul className="mt-4 space-y-3 text-sm text-gray-700 dark:text-gray-300">
+          <li>✓ Official board syllabus identified</li>
           <li>✓ Prescribed poetry collection identified</li>
           <li>✓ Prescribed short-story collection identified</li>
           <li>✓ Prescribed play identified</li>
-          <li>! Individual poem and story titles need verification</li>
-          <li>! Original books visual verification pending</li>
-          <li>! 2027 subject-specific ALP status not verified</li>
+          <li>! Individual poem titles need original-book verification</li>
+          <li>! Individual short-story titles need original-book verification</li>
+          <li>! Subject-specific 2027 ALP status not verified</li>
         </ul>
       </section>
 
-      {/* Official Source */}
-      <section className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
-        <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-          Official Reference
-        </h3>
+      <section className="rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-900">
+        <h2 className="font-extrabold text-gray-900 dark:text-white">
+          Official References
+        </h2>
 
-        <a
-          href="https://home.biselahore.com/downloads/notifications/misc/Syllabus_9th%2610th_%282025_27%29.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-4 inline-flex text-sm font-semibold text-purple-700 hover:underline dark:text-purple-300"
-        >
-          BISE Lahore — Class 9 & 10 Syllabus 2025–2027
-        </a>
+        <div className="mt-4 flex flex-col items-start gap-3 text-sm font-semibold">
+          <a
+            href={info.sources.boardSyllabus}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-purple-700 underline underline-offset-4 dark:text-purple-300"
+          >
+            BISE Lahore — Class 9 & 10 Syllabus 2025–2027 ↗
+          </a>
+
+          <a
+            href={info.sources.officialBooks}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-purple-700 underline underline-offset-4 dark:text-purple-300"
+          >
+            PECTAA Official Books and Publications ↗
+          </a>
+        </div>
       </section>
 
-      {/* Back */}
       <div className="text-center">
         <Link
           href="/classes"

@@ -1,3 +1,4 @@
+
 import {
   parchaBafi2027Info,
   parchaBafiChapters2027,
@@ -8,143 +9,131 @@ import {
   parchaBafi2027DeletionSummary,
 } from "@/data/class9-parcha-bafi-2027-deletions";
 
-type ParchaBafi2027LibraryProps = {
+type Props = {
   bookUrl?: string;
 };
 
 export default function ParchaBafi2027Library({
   bookUrl,
-}: ParchaBafi2027LibraryProps) {
+}: Props) {
   const info = parchaBafi2027Info;
-  const chapters = parchaBafiChapters2027;
 
   return (
-    <div className="space-y-8">
-
-      {/* Subject information */}
-      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <span className="rounded-full bg-violet-100 px-3 py-1 text-xs font-bold text-violet-700 dark:bg-violet-900/40 dark:text-violet-300">
-              Class 9 · Arts Group
-            </span>
-
-            <h2 className="mt-4 text-2xl font-bold text-slate-900 dark:text-white">
-              Clothing &amp; Textile
-            </h2>
-
-            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-              Parcha Bafi · پارچہ بافی
-            </p>
-          </div>
-
-          <div className="rounded-2xl bg-violet-50 px-5 py-4 text-center dark:bg-violet-950/40">
-            <p className="text-2xl font-extrabold text-violet-700 dark:text-violet-300">
-              150
-            </p>
-            <p className="text-xs font-medium text-slate-600 dark:text-slate-300">
-              Combined Marks
-            </p>
-          </div>
+    <main className="space-y-8">
+      <section className="overflow-hidden rounded-3xl bg-gradient-to-br from-violet-950 via-purple-950 to-slate-950 p-6 text-white shadow-xl sm:p-9">
+        <div className="flex flex-wrap gap-2">
+          <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold">
+            CLASS 9
+          </span>
+          <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold">
+            ARTS GROUP
+          </span>
+          <span className="rounded-full bg-violet-300/20 px-3 py-1 text-xs font-bold text-violet-100">
+            SESSION {info.session}
+          </span>
         </div>
 
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {[
-            {
-              label: "Part-I Theory",
-              value: "60",
-            },
-            {
-              label: "Part-I Practical",
-              value: "30",
-            },
-            {
-              label: "Part-II",
-              value: "60",
-            },
-          ].map((item) => (
-            <div
-              key={item.label}
-              className="rounded-2xl bg-slate-50 p-4 dark:bg-slate-800"
-            >
-              <p className="text-2xl font-bold text-slate-900 dark:text-white">
-                {item.value}
-              </p>
+        <h1 className="mt-5 text-3xl font-extrabold sm:text-4xl">
+          {info.subject}
+        </h1>
 
-              <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                {item.label}
+        <p className="mt-3 text-3xl font-bold text-violet-200" dir="rtl">
+          {info.subjectUrdu}
+        </p>
+
+        <p className="mt-4 max-w-3xl text-sm leading-7 text-violet-100">
+          Class 9 Parcha Bafi learning section for students
+          studying textile and clothing concepts through
+          the prescribed Arts Group subject.
+        </p>
+
+        {bookUrl ? (
+          <a
+            href={bookUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex rounded-xl bg-white px-5 py-3 text-sm font-bold text-violet-950 transition hover:bg-violet-50"
+          >
+            Open Complete Textbook ↗
+          </a>
+        ) : (
+          <a
+            href={info.sources.officialTextbookPdf}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex rounded-xl bg-white px-5 py-3 text-sm font-bold text-violet-950 transition hover:bg-violet-50"
+          >
+            Open PECTAA Textbook PDF ↗
+          </a>
+        )}
+      </section>
+
+      <section>
+        <h2 className="mb-4 text-xl font-extrabold text-gray-900 dark:text-white">
+          Examination Scheme
+        </h2>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            ["Combined Marks", info.totalMarks],
+            ["Class 9 Theory", info.partITheoryMarks],
+            ["Class 9 Practical", info.partIPracticalMarks],
+            ["Class 10 Part-II", info.partIITotalMarks],
+          ].map(([label, value]) => (
+            <div
+              key={label}
+              className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-900"
+            >
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {label}
+              </p>
+              <p className="mt-2 text-2xl font-extrabold text-violet-700 dark:text-violet-300">
+                {value}
               </p>
             </div>
           ))}
         </div>
 
-        <div className="mt-5 space-y-2 text-sm text-slate-600 dark:text-slate-300">
-          <p>
-            <strong>Subject:</strong> {info.subject}
-          </p>
-
-          <p>
-            <strong>Academic Session:</strong> {info.session}
-          </p>
-
-          <p>
-            <strong>Examination:</strong> {info.examination}
-          </p>
-
-          <p>
-            <strong>Textbook Authority:</strong>{" "}
-            {info.textbookAuthority}
-          </p>
-
-          <p>
-            <strong>Textbook Edition:</strong>{" "}
-            {info.textbookEdition}
+        <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4 dark:border-amber-900 dark:bg-amber-950/30">
+          <p className="text-sm leading-6 text-amber-900 dark:text-amber-200">
+            Exact examination duration is not independently
+            confirmed in the available subject data. It is
+            intentionally not displayed as a confirmed figure.
           </p>
         </div>
-
-        {bookUrl && (
-          <a
-            href={bookUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex rounded-xl bg-violet-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-violet-700"
-          >
-            Open Textbook
-          </a>
-        )}
       </section>
 
-      {/* Chapter library */}
-      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+      <section className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-900">
+        <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white">
           Class 9 Chapter Library
-        </h3>
+        </h2>
 
-        <p className="mt-2 text-sm leading-6 text-slate-500 dark:text-slate-400">
-          Original textbook ki chapter-wise visual verification
-          abhi pending hai. Is liye unverified chapter names ya
-          topics display nahi kiye ja rahe.
+        <p className="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">
+          The exact Class IX chapter sequence and original
+          textbook contents have not yet been independently
+          verified. No unverified chapter titles or topics
+          are being published.
         </p>
 
-        {chapters.length > 0 ? (
+        {parchaBafiChapters2027.length > 0 ? (
           <div className="mt-5 space-y-3">
-            {chapters.map((chapter) => (
+            {parchaBafiChapters2027.map((chapter) => (
               <article
                 key={chapter.number}
-                className="rounded-2xl border border-slate-200 p-4 dark:border-slate-700"
+                className="rounded-xl border border-gray-200 p-4 dark:border-gray-700"
               >
-                <h4 className="font-semibold text-slate-900 dark:text-white">
+                <h3 className="font-bold text-gray-900 dark:text-white">
                   Chapter {chapter.number}: {chapter.title}
-                </h4>
+                </h3>
 
                 {chapter.titleUrdu && (
-                  <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                  <p className="mt-2 text-lg text-gray-700 dark:text-gray-300" dir="rtl">
                     {chapter.titleUrdu}
                   </p>
                 )}
 
                 {chapter.topics.length > 0 && (
-                  <ul className="mt-3 list-inside list-disc space-y-1 text-sm text-slate-600 dark:text-slate-300">
+                  <ul className="mt-3 list-inside list-disc space-y-2 text-sm text-gray-600 dark:text-gray-300">
                     {chapter.topics.map((topic, index) => (
                       <li key={index}>{topic}</li>
                     ))}
@@ -154,75 +143,99 @@ export default function ParchaBafi2027Library({
             ))}
           </div>
         ) : (
-          <div className="mt-5 rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-6 text-center dark:border-slate-700 dark:bg-slate-800/50">
+          <div className="mt-5 rounded-2xl border border-dashed border-violet-300 bg-violet-50 p-6 text-center dark:border-violet-800 dark:bg-violet-950/20">
             <div className="text-3xl">📚</div>
-
-            <h4 className="mt-3 font-semibold text-slate-800 dark:text-white">
-              Chapter details are being verified
-            </h4>
-
-            <p className="mx-auto mt-2 max-w-lg text-sm leading-6 text-slate-500 dark:text-slate-400">
-              Class IX ke exact chapter titles, sequence aur
-              textbook topics official textbook se verify
-              hone ke baad yahan add kiye jayenge.
+            <h3 className="mt-3 font-bold text-gray-900 dark:text-white">
+              Chapter details are awaiting verification
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">
+              Original textbook ke pages check hone ke baad
+              exact chapter titles, topics aur sequence yahan
+              add kiye jayenge.
             </p>
           </div>
         )}
       </section>
 
-      {/* ALP status */}
       <section className="rounded-2xl border border-amber-200 bg-amber-50 p-5 dark:border-amber-900/60 dark:bg-amber-950/20">
-        <h3 className="font-bold text-amber-900 dark:text-amber-300">
+        <h2 className="font-extrabold text-amber-950 dark:text-amber-200">
           2027 ALP / Deleted Topics Status
-        </h3>
+        </h2>
 
-        <p className="mt-3 text-sm leading-6 text-amber-900/80 dark:text-amber-200/80">
+        <p className="mt-3 text-sm leading-7 text-amber-900 dark:text-amber-100">
           {parchaBafi2027DeletionSummary.note}
         </p>
 
-        <p className="mt-3 text-sm font-semibold text-amber-800 dark:text-amber-300">
-          Verified deletion entries:{" "}
-          {parchaBafi2027Deletions.length}
+        <p className="mt-3 text-sm font-bold text-amber-900 dark:text-amber-200">
+          {parchaBafi2027DeletionSummary.status}
+        </p>
+
+        <p className="mt-3 text-sm text-amber-900 dark:text-amber-100">
+          Verified deletion entries: {parchaBafi2027Deletions.length}
         </p>
       </section>
 
-      {/* Verification information */}
-      <section className="rounded-2xl border border-blue-200 bg-blue-50 p-5 dark:border-blue-900/60 dark:bg-blue-950/20">
-        <h3 className="font-bold text-blue-900 dark:text-blue-300">
-          Sources &amp; Verification
-        </h3>
+      <section className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-900">
+        <h2 className="text-xl font-extrabold text-gray-900 dark:text-white">
+          Subject Information
+        </h2>
 
-        <p className="mt-2 text-sm leading-6 text-blue-900/80 dark:text-blue-200/80">
-          Subject listing PECTAA catalogue se aur examination
-          scheme BISE Lahore ke 2025–2027 syllabus reference
-          se li gayi hai. Original textbook aur detailed
-          chapter-wise content ki verification pending hai.
-        </p>
-
-        <div className="mt-4 flex flex-wrap gap-4 text-sm font-semibold">
-          <a
-            href="https://pectaa.edu.pk/books-and-publications/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-700 underline dark:text-blue-300"
-          >
-            PECTAA Books Catalogue
-          </a>
-
-          <a
-            href="https://home.biselahore.com/downloads/notifications/misc/Syllabus_9th%2610th_%282025_27%29.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-700 underline dark:text-blue-300"
-          >
-            BISE Lahore Syllabus
-          </a>
+        <div className="mt-4 space-y-3 text-sm leading-6 text-gray-700 dark:text-gray-300">
+          <p><strong>Subject:</strong> {info.subject}</p>
+          <p><strong>Urdu Name:</strong> {info.subjectUrdu}</p>
+          <p><strong>Class:</strong> {info.class}</p>
+          <p><strong>Group:</strong> Arts</p>
+          <p><strong>Academic Session:</strong> {info.session}</p>
+          <p><strong>Examination:</strong> {info.examination}</p>
+          <p><strong>Textbook Authority:</strong> {info.textbookAuthority}</p>
+          <p><strong>Textbook Edition:</strong> {info.textbookEdition}</p>
+          <p><strong>Medium:</strong> {info.medium.join(", ")}</p>
         </div>
       </section>
 
-      <p className="text-center text-xs text-slate-400">
-        Pakistan Learning Academy · Session 2026-27
-      </p>
-    </div>
+      <section className="rounded-2xl border border-blue-200 bg-blue-50 p-5 dark:border-blue-900/50 dark:bg-blue-950/20">
+        <h2 className="font-extrabold text-blue-950 dark:text-blue-200">
+          Official Sources
+        </h2>
+
+        <div className="mt-4 flex flex-col items-start gap-3 text-sm font-bold">
+          <a
+            href={info.sources.officialTextbookPdf}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-800 underline underline-offset-4 dark:text-blue-300"
+          >
+            PECTAA Prescribed Textbook PDF ↗
+          </a>
+
+          <a
+            href={info.sources.officialBooks}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-800 underline underline-offset-4 dark:text-blue-300"
+          >
+            PECTAA Books Catalogue ↗
+          </a>
+
+          <a
+            href={info.sources.officialCurriculum}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-800 underline underline-offset-4 dark:text-blue-300"
+          >
+            PECTAA Curriculum & Compliance ↗
+          </a>
+
+          <a
+            href={info.sources.syllabusReferenceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-800 underline underline-offset-4 dark:text-blue-300"
+          >
+            BISE Lahore Syllabus 2025–2027 ↗
+          </a>
+        </div>
+      </section>
+    </main>
   );
 }

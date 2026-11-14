@@ -1,4 +1,3 @@
-// components/alHadithDarsENizami2027library.tsx
 
 import Link from "next/link";
 
@@ -8,7 +7,6 @@ import {
 } from "@/data/class9-al-hadith-dars-e-nizami-2027";
 
 import {
-  alHadith2027Deletions,
   alHadith2027DeletionSummary,
 } from "@/data/class9-al-hadith-dars-e-nizami-2027-deletions";
 
@@ -17,41 +15,35 @@ export default function AlHadithDarsENizami2027Library({
 }: {
   bookUrl?: string;
 }) {
-  const class9Sections = alHadithSections2027;
+  const info = alHadith2027Info;
 
   return (
     <main className="space-y-8">
-      {/* Header */}
       <section className="overflow-hidden rounded-3xl border border-teal-200 bg-gradient-to-br from-teal-50 via-white to-emerald-50 p-6 shadow-sm dark:border-teal-900/50 dark:from-teal-950/30 dark:via-gray-900 dark:to-emerald-950/20 sm:p-8">
         <div className="flex flex-wrap gap-2">
           <span className="rounded-full bg-teal-100 px-3 py-1 text-xs font-bold text-teal-800 dark:bg-teal-900/50 dark:text-teal-200">
             CLASS 9
           </span>
-
           <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-300">
-            Annual Examination 2027
+            {info.examination}
           </span>
-
           <span className="rounded-full bg-purple-100 px-3 py-1 text-xs font-bold text-purple-800 dark:bg-purple-900/40 dark:text-purple-200">
-            Dars-e-Nizami Group
+            {info.group}
           </span>
         </div>
 
         <h1 className="mt-5 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-          Al-Hadith
+          {info.subject}
         </h1>
 
-        <p
-          className="mt-3 text-3xl font-bold text-teal-800 dark:text-teal-300"
-          dir="rtl"
-        >
-          الحدیث
+        <p className="mt-3 text-3xl font-bold text-teal-800 dark:text-teal-300" dir="rtl">
+          {info.subjectUrdu}
         </p>
 
         <p className="mt-4 max-w-3xl text-sm leading-7 text-gray-600 dark:text-gray-300">
           Class 9 Al-Hadith syllabus for the Dars-e-Nizami group,
-          including prescribed topics, translation, brief explanation
-          and examination information for the 2026–27 session.
+          including prescribed topic headings, translation,
+          brief explanation and examination information.
         </p>
 
         {bookUrl && (
@@ -61,13 +53,11 @@ export default function AlHadithDarsENizami2027Library({
             rel="noopener noreferrer"
             className="mt-6 inline-flex items-center gap-2 rounded-xl bg-teal-700 px-5 py-3 text-sm font-bold text-white transition hover:bg-teal-800"
           >
-            Open Reference Book
-            <span aria-hidden="true">↗</span>
+            Open Reference Book ↗
           </a>
         )}
       </section>
 
-      {/* Examination Scheme */}
       <section>
         <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
           Examination Scheme
@@ -77,15 +67,15 @@ export default function AlHadithDarsENizami2027Library({
           {[
             {
               label: "Total Marks",
-              value: `${alHadith2027Info.partI.marks} Marks`,
+              value: `${info.partI.marks} Marks`,
             },
             {
               label: "Examination Duration",
-              value: alHadith2027Info.partI.duration,
+              value: info.partI.duration,
             },
             {
-              label: "Total Hadith Topics",
-              value: `${alHadith2027Info.totalTopics} Topics`,
+              label: "Prescribed Topics",
+              value: `${info.totalTopics} Topics`,
             },
           ].map((item) => (
             <div
@@ -95,7 +85,6 @@ export default function AlHadithDarsENizami2027Library({
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 {item.label}
               </p>
-
               <p className="mt-2 text-xl font-extrabold text-gray-900 dark:text-white">
                 {item.value}
               </p>
@@ -104,7 +93,6 @@ export default function AlHadithDarsENizami2027Library({
         </div>
       </section>
 
-      {/* Paper Distribution */}
       <section className="rounded-2xl border border-teal-200 bg-teal-50/60 p-5 dark:border-teal-900/50 dark:bg-teal-950/20">
         <h2 className="text-lg font-bold text-gray-900 dark:text-white">
           Paper Marks Distribution
@@ -115,11 +103,9 @@ export default function AlHadithDarsENizami2027Library({
             <p className="text-sm text-gray-500 dark:text-gray-400">
               First Section
             </p>
-
             <p className="mt-2 text-2xl font-extrabold text-teal-800 dark:text-teal-300">
-              {alHadith2027Info.paperDistribution.firstSectionMarks} Marks
+              {info.paperDistribution.firstSectionMarks} Marks
             </p>
-
             <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
               43 prescribed topics
             </p>
@@ -129,11 +115,9 @@ export default function AlHadithDarsENizami2027Library({
             <p className="text-sm text-gray-500 dark:text-gray-400">
               Second Section
             </p>
-
             <p className="mt-2 text-2xl font-extrabold text-teal-800 dark:text-teal-300">
-              {alHadith2027Info.paperDistribution.secondSectionMarks} Marks
+              {info.paperDistribution.secondSectionMarks} Marks
             </p>
-
             <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
               20 prescribed topics
             </p>
@@ -141,27 +125,24 @@ export default function AlHadithDarsENizami2027Library({
         </div>
 
         <p className="mt-4 text-sm leading-7 text-gray-700 dark:text-gray-300">
-          <strong>Question pattern:</strong>{" "}
-          {alHadith2027Info.questionPattern}
+          <strong>Question Pattern:</strong> {info.questionPattern}
         </p>
       </section>
 
-      {/* Class 9 Sections */}
       <section>
         <div className="mb-5">
           <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white">
             Class 9 Prescribed Topics
           </h2>
-
           <p className="mt-2 text-sm leading-6 text-gray-500 dark:text-gray-400">
-            The following sections and topic headings are based on
-            the BISE Lahore 2025–2027 syllabus. They are topic
-            references, not complete Hadith texts.
+            Topic headings are readable English renderings of
+            headings extracted from the BISE Lahore 2025–2027
+            syllabus. They are not complete Hadith texts.
           </p>
         </div>
 
         <div className="space-y-6">
-          {class9Sections.map((section) => (
+          {alHadithSections2027.map((section) => (
             <article
               key={section.number}
               className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-900"
@@ -172,7 +153,6 @@ export default function AlHadithDarsENizami2027Library({
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white">
                       {section.title}
                     </h3>
-
                     <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
                       {section.topics.length} prescribed topics
                     </p>
@@ -198,11 +178,7 @@ export default function AlHadithDarsENizami2027Library({
                       <p className="text-sm font-semibold leading-6 text-gray-900 dark:text-white">
                         {topic.title}
                       </p>
-
-                      <p
-                        className="mt-1 text-base leading-7 text-gray-600 dark:text-gray-300"
-                        dir="rtl"
-                      >
+                      <p className="mt-1 text-base leading-7 text-gray-600 dark:text-gray-300" dir="rtl">
                         {topic.titleUrdu}
                       </p>
                     </div>
@@ -214,7 +190,6 @@ export default function AlHadithDarsENizami2027Library({
         </div>
       </section>
 
-      {/* Class 10 Reference */}
       <section className="rounded-2xl border border-purple-200 bg-purple-50/60 p-5 dark:border-purple-900/50 dark:bg-purple-950/20">
         <h2 className="text-lg font-bold text-gray-900 dark:text-white">
           Class 10 — Part II Reference
@@ -228,23 +203,17 @@ export default function AlHadithDarsENizami2027Library({
 
         <div className="mt-4 rounded-xl border border-purple-100 bg-white p-4 dark:border-purple-900/40 dark:bg-gray-900">
           <h3 className="font-bold text-gray-900 dark:text-white">
-            {alHadith2027Info.class10Reference.subject}
+            {info.class10Reference.subject}
           </h3>
-
-          <p
-            className="mt-2 text-xl text-gray-700 dark:text-gray-300"
-            dir="rtl"
-          >
-            {alHadith2027Info.class10Reference.subjectUrdu}
+          <p className="mt-2 text-xl text-gray-700 dark:text-gray-300" dir="rtl">
+            {info.class10Reference.subjectUrdu}
           </p>
-
           <p className="mt-3 text-sm font-semibold text-purple-800 dark:text-purple-300">
-            {alHadith2027Info.class10Reference.marks} Marks
+            {info.class10Reference.marks} Marks
           </p>
         </div>
       </section>
 
-      {/* Reference Books */}
       <section className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-900">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white">
           Prescribed Reference Books
@@ -255,26 +224,22 @@ export default function AlHadithDarsENizami2027Library({
         </p>
 
         <div className="mt-5 space-y-4">
-          {alHadith2027Info.prescribedReferences.map(
-            (book, index) => (
-              <div
-                key={index}
-                className="rounded-xl border border-gray-200 p-4 dark:border-gray-700"
-              >
-                <p className="font-bold text-gray-900 dark:text-white">
-                  {index + 1}. {book.title}
-                </p>
-
-                <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
-                  <strong>Author:</strong> {book.author}
-                </p>
-
-                <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                  <strong>Publisher:</strong> {book.publisher}
-                </p>
-              </div>
-            )
-          )}
+          {info.prescribedReferences.map((book, index) => (
+            <div
+              key={book.title}
+              className="rounded-xl border border-gray-200 p-4 dark:border-gray-700"
+            >
+              <p className="font-bold text-gray-900 dark:text-white">
+                {index + 1}. {book.title}
+              </p>
+              <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
+                <strong>Author:</strong> {book.author}
+              </p>
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                <strong>Publisher:</strong> {book.publisher}
+              </p>
+            </div>
+          ))}
         </div>
 
         <div className="mt-4 rounded-xl bg-orange-50 p-4 dark:bg-orange-950/20">
@@ -287,7 +252,6 @@ export default function AlHadithDarsENizami2027Library({
         </div>
       </section>
 
-      {/* ALP Status */}
       <section className="rounded-2xl border border-orange-200 bg-orange-50/70 p-5 dark:border-orange-900/50 dark:bg-orange-950/20">
         <h2 className="text-lg font-bold text-gray-900 dark:text-white">
           2027 ALP & Deletion Status
@@ -300,14 +264,8 @@ export default function AlHadithDarsENizami2027Library({
         <p className="mt-3 text-sm leading-7 text-gray-700 dark:text-gray-300">
           {alHadith2027DeletionSummary.note}
         </p>
-
-        <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
-          Verified deletion entries:{" "}
-          <strong>{alHadith2027Deletions.length}</strong>
-        </p>
       </section>
 
-      {/* Official Source */}
       <section className="rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800/50">
         <h2 className="font-bold text-gray-900 dark:text-white">
           Official Syllabus Reference
@@ -320,16 +278,15 @@ export default function AlHadithDarsENizami2027Library({
         </p>
 
         <a
-          href="https://home.biselahore.com/downloads/notifications/misc/Syllabus_9th%2610th_%282025_27%29.pdf"
+          href={info.sources.boardSyllabus}
           target="_blank"
           rel="noopener noreferrer"
           className="mt-4 inline-flex font-semibold text-teal-700 underline underline-offset-4 hover:text-teal-900 dark:text-teal-300"
         >
-          View BISE Lahore Official Syllabus
+          View BISE Lahore Official Syllabus ↗
         </a>
       </section>
 
-      {/* Navigation */}
       <div>
         <Link
           href="/classes"

@@ -1,332 +1,219 @@
 
-"use client";
+import Link from "next/link";
 
-import { useState } from "react";
 import {
   islamiyat2027Info,
   islamiyatChapters2027,
 } from "@/data/class9-islamiat-2027";
 
 import {
-  islamiyat2027Deletions,
   islamiyat2027PaperInstructions,
-  islamiyat2027DeletionSummary,
-  islamiyat2027DeletionSource,
 } from "@/data/class9-islamiat-2027-deletions";
 
-type Islamiat2027LibraryProps = {
+type Props = {
   bookUrl?: string;
 };
 
-export default function Islamiat2027Library({
-  bookUrl,
-}: Islamiat2027LibraryProps) {
-  const [showExcluded, setShowExcluded] = useState(true);
-  const [showInstructions, setShowInstructions] = useState(true);
-
-  const isChapterExcluded = (chapterNumber: number) =>
-    islamiyatChapters2027.some(
-      (chapter) =>
-        chapter.number === chapterNumber &&
-        chapter.examStatus === "fully-excluded"
-    );
-
-  const getChapterDeletion = (chapterNumber: number) =>
-    islamiyat2027Deletions.filter(
-      (deletion) => deletion.chapter === chapterNumber
-    );
+export default function Islamiat2027Library({ bookUrl }: Props) {
+  const examinableChapters = islamiyatChapters2027.filter(
+    (chapter) => chapter.examStatus !== "fully-excluded"
+  );
 
   return (
-    <main className="space-y-6">
-      <section className="overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-950 via-emerald-900 to-teal-800 p-6 text-white shadow-xl sm:p-8">
+    <main className="space-y-8">
+      <section className="overflow-hidden rounded-3xl border border-emerald-200 bg-gradient-to-br from-emerald-50 via-white to-teal-50 p-6 shadow-sm dark:border-emerald-900/50 dark:from-emerald-950/30 dark:via-gray-900 dark:to-teal-950/20 sm:p-8">
         <div className="flex flex-wrap gap-2">
-          <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold">
+          <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200">
             CLASS 9
           </span>
-          <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold">
-            SESSION 2026–27
+          <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-300">
+            SESSION {islamiyat2027Info.session}
           </span>
-          <span className="rounded-full bg-emerald-300/20 px-3 py-1 text-xs font-bold text-emerald-100">
-            ANNUAL EXAM 2027
+          <span className="rounded-full bg-teal-100 px-3 py-1 text-xs font-bold text-teal-800 dark:bg-teal-900/40 dark:text-teal-200">
+            {islamiyat2027Info.examination}
           </span>
         </div>
 
-        <h2 className="mt-5 text-3xl font-extrabold sm:text-4xl">
-          Islamiat 2027
-        </h2>
+        <h1 className="mt-5 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+          Islamiat
+        </h1>
 
-        <p className="mt-3 max-w-2xl text-sm leading-7 text-emerald-100">
-          Class 9 Islamiat Smart Syllabus, chapter-wise deleted topics,
-          examination instructions and paper information.
+        <p className="mt-3 text-2xl font-bold text-emerald-800 dark:text-emerald-300" dir="rtl">
+          اسلامیات
         </p>
 
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
-          <div className="rounded-2xl bg-white/10 p-4">
-            <p className="text-3xl font-extrabold">
-              {islamiyat2027Info.totalMarks}
-            </p>
-            <p className="mt-1 text-xs text-emerald-100">Total Marks</p>
-          </div>
+        <p className="mt-4 max-w-3xl text-sm leading-7 text-gray-600 dark:text-gray-300">
+          Class 9 Islamiat examination preparation for Annual
+          Examination 2027. This page presents the examinable
+          chapter list and the available paper instructions.
+        </p>
 
-          <div className="rounded-2xl bg-white/10 p-4">
-            <p className="text-3xl font-extrabold">3</p>
-            <p className="mt-1 text-xs text-emerald-100">Hours</p>
-          </div>
-
-          <div className="col-span-2 rounded-2xl bg-white/10 p-4 sm:col-span-1">
-            <p className="text-3xl font-extrabold">
-              {islamiyat2027Info.totalChapters}
-            </p>
-            <p className="mt-1 text-xs text-emerald-100">Textbook Chapters</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-        <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 dark:border-emerald-900 dark:bg-emerald-950/30">
-          <p className="text-2xl font-extrabold text-emerald-700 dark:text-emerald-300">
-            {islamiyat2027DeletionSummary.partiallyAffectedChapters}
-          </p>
-          <p className="mt-1 text-xs text-emerald-800 dark:text-emerald-200">
-            Partially Affected
-          </p>
-        </div>
-
-        <div className="rounded-2xl border border-red-200 bg-red-50 p-4 dark:border-red-900 dark:bg-red-950/30">
-          <p className="text-2xl font-extrabold text-red-700 dark:text-red-300">
-            {islamiyat2027DeletionSummary.fullyExcludedChapters}
-          </p>
-          <p className="mt-1 text-xs text-red-800 dark:text-red-200">
-            Fully Excluded
-          </p>
-        </div>
-
-        <div className="col-span-2 rounded-2xl border border-blue-200 bg-blue-50 p-4 dark:border-blue-900 dark:bg-blue-950/30 sm:col-span-1">
-          <p className="text-2xl font-extrabold text-blue-700 dark:text-blue-300">
-            {islamiyat2027DeletionSummary.excludedHadithNumbers.length}
-          </p>
-          <p className="mt-1 text-xs text-blue-800 dark:text-blue-200">
-            Excluded Ahadith
-          </p>
-        </div>
-      </section>
-
-      {bookUrl && (
-        <section className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5 dark:border-emerald-900 dark:bg-emerald-950/30">
-          <h3 className="font-bold text-emerald-900 dark:text-emerald-200">
-            Islamiat Textbook
-          </h3>
-          <p className="mt-2 text-sm text-emerald-800 dark:text-emerald-300">
-            Open the available Class 9 Islamiat textbook.
-          </p>
+        {bookUrl && (
           <a
             href={bookUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex rounded-xl bg-emerald-700 px-5 py-3 text-sm font-bold text-white hover:bg-emerald-800"
+            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-5 py-3 text-sm font-bold text-white transition hover:bg-emerald-800"
           >
-            Open Islamiat Book
+            Open Islamiat Textbook ↗
           </a>
-        </section>
-      )}
+        )}
+      </section>
 
-      <section className="space-y-3">
-        <h3 className="text-xl font-extrabold text-gray-900 dark:text-white">
-          Chapter-wise Syllabus
-        </h3>
+      <section>
+        <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
+          Examination Information
+        </h2>
 
-        {islamiyatChapters2027.map((chapter) => {
-          const excluded = isChapterExcluded(chapter.number);
-          const deletions = getChapterDeletion(chapter.number);
-
-          return (
-            <article
-              key={chapter.number}
-              className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-900"
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            {
+              label: "Total Marks",
+              value: `${islamiyat2027Info.totalMarks}`,
+            },
+            {
+              label: "Paper Duration",
+              value: islamiyat2027Info.paperDuration,
+            },
+            {
+              label: "Examinable Chapters",
+              value: `${examinableChapters.length}`,
+            },
+          ].map((item) => (
+            <div
+              key={item.label}
+              className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-900"
             >
-              <div className="flex flex-wrap items-start justify-between gap-3">
-                <div className="min-w-0 flex-1">
-                  <p className="text-xs font-bold uppercase tracking-wide text-emerald-700 dark:text-emerald-300">
-                    Chapter {chapter.number}
-                  </p>
-
-                  <h4 className="mt-1 font-bold text-gray-900 dark:text-white">
-                    {chapter.title}
-                  </h4>
-
-                  {chapter.titleUrdu && (
-                    <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                      {chapter.titleUrdu}
-                    </p>
-                  )}
-                </div>
-
-                <span
-                  className={`rounded-full px-3 py-1 text-xs font-bold ${
-                    excluded
-                      ? "bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-200"
-                      : deletions.length > 0
-                        ? "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-200"
-                        : "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200"
-                  }`}
-                >
-                  {excluded
-                    ? "Fully Excluded"
-                    : deletions.length > 0
-                      ? "Partially Affected"
-                      : "Included"}
-                </span>
-              </div>
-
-              {chapter.examNote && (
-                <p className="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-400">
-                  {chapter.examNote}
-                </p>
-              )}
-
-              {deletions.length > 0 && (
-                <div className="mt-4 space-y-3">
-                  {deletions.map((deletion, index) => (
-                    <div
-                      key={`${chapter.number}-${index}`}
-                      className="rounded-xl border border-red-200 bg-red-50 p-4 dark:border-red-900 dark:bg-red-950/20"
-                    >
-                      <p className="font-bold text-red-800 dark:text-red-200">
-                        {deletion.category}
-                      </p>
-
-                      {deletion.categoryUrdu && (
-                        <p className="mt-1 text-sm text-red-700 dark:text-red-300">
-                          {deletion.categoryUrdu}
-                        </p>
-                      )}
-
-                      <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-gray-700 dark:text-gray-300">
-                        {deletion.excludedTopics.map((topic, topicIndex) => (
-                          <li key={topicIndex}>{topic}</li>
-                        ))}
-                      </ul>
-
-                      {deletion.examNote && (
-                        <p className="mt-3 text-xs leading-6 text-red-800 dark:text-red-300">
-                          {deletion.examNote}
-                        </p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {chapter.number === 6 && (
-                <p className="mt-3 rounded-xl bg-amber-50 p-3 text-sm text-amber-900 dark:bg-amber-950/30 dark:text-amber-200">
-                  Chapter 6 se detailed questions paper mein include nahi honge.
-                </p>
-              )}
-
-              {chapter.number === 7 && (
-                <p className="mt-3 rounded-xl bg-red-50 p-3 text-sm text-red-800 dark:bg-red-950/30 dark:text-red-200">
-                  Complete chapter examination syllabus se excluded hai.
-                </p>
-              )}
-            </article>
-          );
-        })}
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {item.label}
+              </p>
+              <p className="mt-2 text-2xl font-extrabold text-gray-900 dark:text-white">
+                {item.value}
+              </p>
+            </div>
+          ))}
+        </div>
       </section>
 
-      <section className="rounded-2xl border border-red-200 bg-red-50 p-5 dark:border-red-900 dark:bg-red-950/20">
-        <button
-          type="button"
-          onClick={() => setShowExcluded((value) => !value)}
-          className="flex w-full items-center justify-between gap-3 text-left"
-        >
-          <span className="text-lg font-extrabold text-red-900 dark:text-red-200">
-            Exclusion Summary
-          </span>
-          <span className="text-sm font-bold text-red-700 dark:text-red-300">
-            {showExcluded ? "Hide" : "Show"}
-          </span>
-        </button>
-
-        {showExcluded && (
-          <div className="mt-4 space-y-3 text-sm text-red-900 dark:text-red-200">
-            <p>
-              <strong>Excluded Hadith numbers:</strong>{" "}
-              {islamiyat2027DeletionSummary.excludedHadithNumbers.join(", ")}
-            </p>
-
-            <p>
-              <strong>Chapter 6:</strong> Detailed questions excluded.
-            </p>
-
-            <p>
-              <strong>Chapter 7:</strong> Completely excluded.
-            </p>
-          </div>
-        )}
-      </section>
-
-      <section className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900">
-        <button
-          type="button"
-          onClick={() => setShowInstructions((value) => !value)}
-          className="flex w-full items-center justify-between gap-3 text-left"
-        >
-          <span className="text-lg font-extrabold text-gray-900 dark:text-white">
-            Paper Instructions
-          </span>
-          <span className="text-sm font-bold text-emerald-700 dark:text-emerald-300">
-            {showInstructions ? "Hide" : "Show"}
-          </span>
-        </button>
-
-        {showInstructions && (
-          <div className="mt-4 space-y-3">
-            {islamiyat2027PaperInstructions.map((instruction, index) => (
-              <div
-                key={index}
-                className="rounded-xl bg-gray-50 p-4 dark:bg-gray-800"
-              >
-                <h4 className="font-bold text-gray-900 dark:text-white">
-                  {instruction.title}
-                </h4>
-                <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">
-                  {instruction.instruction}
-                </p>
-              </div>
-            ))}
-          </div>
-        )}
-      </section>
-
-      <section className="rounded-2xl border border-amber-200 bg-amber-50 p-5 dark:border-amber-900 dark:bg-amber-950/20">
-        <h3 className="font-extrabold text-amber-900 dark:text-amber-200">
-          Source and Verification
-        </h3>
-
-        <div className="mt-3 space-y-2 text-sm text-amber-900 dark:text-amber-200">
-          <p>
-            <strong>Notification:</strong>{" "}
-            {islamiyat2027DeletionSource.notification}
-          </p>
-          <p>
-            <strong>Date:</strong> {islamiyat2027DeletionSource.date}
-          </p>
-          <p>
-            <strong>Session:</strong> {islamiyat2027DeletionSource.session}
-          </p>
-          <p>
-            <strong>Examination:</strong>{" "}
-            {islamiyat2027DeletionSource.examination}
-          </p>
-          <p className="leading-6">
-            {islamiyat2027DeletionSource.verification}
+      <section>
+        <div className="mb-5">
+          <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white">
+            Class 9 Examinable Chapters
+          </h2>
+          <p className="mt-2 text-sm leading-6 text-gray-500 dark:text-gray-400">
+            Only chapters retained in the available 2027 syllabus
+            transcription are shown here.
           </p>
         </div>
 
-        <p className="mt-4 text-xs leading-6 text-amber-800 dark:text-amber-300">
+        <div className="space-y-3">
+          {examinableChapters.map((chapter) => (
+            <article
+              key={chapter.number}
+              className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-900"
+            >
+              <div className="flex items-start gap-4">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-sm font-extrabold text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-200">
+                  {chapter.number}
+                </span>
+
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-bold leading-6 text-gray-900 dark:text-white">
+                    {chapter.title}
+                  </h3>
+
+                  {chapter.titleUrdu && (
+                    <p className="mt-2 text-base text-gray-600 dark:text-gray-300" dir="rtl">
+                      {chapter.titleUrdu}
+                    </p>
+                  )}
+
+                  <p className="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-400">
+                    {chapter.examNote}
+                  </p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-2xl border border-emerald-200 bg-emerald-50/60 p-5 dark:border-emerald-900/50 dark:bg-emerald-950/20">
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+          Paper Instructions
+        </h2>
+
+        <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">
+          Follow these examination instructions while preparing
+          the retained textbook material.
+        </p>
+
+        <div className="mt-4 space-y-3">
+          {islamiyat2027PaperInstructions.map((instruction, index) => (
+            <div
+              key={index}
+              className="rounded-xl border border-emerald-100 bg-white p-4 dark:border-emerald-900/40 dark:bg-gray-900"
+            >
+              <h3 className="font-bold text-gray-900 dark:text-white">
+                {instruction.title}
+              </h3>
+              <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-300">
+                {instruction.instruction}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-2xl border border-orange-200 bg-orange-50/70 p-5 dark:border-orange-900/50 dark:bg-orange-950/20">
+        <h2 className="text-lg font-bold text-gray-900 dark:text-white">
+          Syllabus Verification Notice
+        </h2>
+
+        <span className="mt-3 inline-flex rounded-full bg-orange-100 px-3 py-1 text-xs font-bold text-orange-800 dark:bg-orange-900/50 dark:text-orange-200">
+          Original PDF Visual Check Pending
+        </span>
+
+        <p className="mt-3 text-sm leading-7 text-gray-700 dark:text-gray-300">
           {islamiyat2027Info.verificationNote}
         </p>
+
+        <p className="mt-3 text-sm leading-7 text-gray-700 dark:text-gray-300">
+          The chapter titles currently available in the source
+          data are generic for Chapters 1–6. They have not been
+          replaced with invented textbook titles.
+        </p>
       </section>
+
+      <section className="rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800/50">
+        <h2 className="font-bold text-gray-900 dark:text-white">
+          Official Syllabus Reference
+        </h2>
+
+        <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">
+          Notification: {islamiyat2027Info.notification}
+          <br />
+          Date: {islamiyat2027Info.notificationDate}
+        </p>
+
+        <a
+          href={islamiyat2027Info.officialReference}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex font-semibold text-emerald-700 underline underline-offset-4 hover:text-emerald-900 dark:text-emerald-300"
+        >
+          View PECTAA Official Reference ↗
+        </a>
+      </section>
+
+      <div>
+        <Link
+          href="/classes"
+          className="inline-flex rounded-xl bg-gray-900 px-5 py-3 text-sm font-bold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+        >
+          Back to Classes
+        </Link>
+      </div>
     </main>
   );
 }

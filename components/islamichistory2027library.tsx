@@ -1,4 +1,3 @@
-// components/islamichistory2027library.tsx
 
 import Link from "next/link";
 
@@ -8,7 +7,6 @@ import {
 } from "@/data/class9-islamic-history-2027";
 
 import {
-  islamicHistory2027Deletions,
   islamicHistory2027DeletionSummary,
 } from "@/data/class9-islamic-history-2027-deletions";
 
@@ -17,6 +15,8 @@ export default function IslamicHistory2027Library({
 }: {
   bookUrl?: string;
 }) {
+  const info = islamicHistory2027Info;
+
   const class9Chapters = islamicHistoryChapters2027.filter(
     (chapter) => chapter.class === 9
   );
@@ -27,17 +27,14 @@ export default function IslamicHistory2027Library({
 
   return (
     <main className="space-y-8">
-      {/* Header */}
       <section className="overflow-hidden rounded-3xl border border-emerald-200 bg-gradient-to-br from-emerald-50 via-white to-teal-50 p-6 shadow-sm dark:border-emerald-900/50 dark:from-emerald-950/30 dark:via-gray-900 dark:to-teal-950/20 sm:p-8">
         <div className="flex flex-wrap gap-2">
           <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200">
             CLASS 9
           </span>
-
           <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-300">
-            Annual Examination 2027
+            {info.examination}
           </span>
-
           <span className="rounded-full bg-teal-100 px-3 py-1 text-xs font-bold text-teal-800 dark:bg-teal-900/40 dark:text-teal-200">
             Arts / Humanities
           </span>
@@ -47,17 +44,14 @@ export default function IslamicHistory2027Library({
           Islamic History
         </h1>
 
-        <p
-          className="mt-3 text-3xl font-bold text-emerald-800 dark:text-emerald-300"
-          dir="rtl"
-        >
-          تاریخِ اسلام
+        <p className="mt-3 text-3xl font-bold text-emerald-800 dark:text-emerald-300" dir="rtl">
+          {info.subjectUrdu}
         </p>
 
         <p className="mt-4 max-w-3xl text-sm leading-7 text-gray-600 dark:text-gray-300">
           Class 9 Islamic History syllabus, historical periods,
-          important personalities and examination information for
-          the 2026–27 academic session.
+          important personalities and examination information
+          for the 2026–27 academic session.
         </p>
 
         {bookUrl && (
@@ -67,13 +61,11 @@ export default function IslamicHistory2027Library({
             rel="noopener noreferrer"
             className="mt-6 inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-5 py-3 text-sm font-bold text-white transition hover:bg-emerald-800"
           >
-            Open Textbook
-            <span aria-hidden="true">↗</span>
+            Open Textbook ↗
           </a>
         )}
       </section>
 
-      {/* Examination Scheme */}
       <section>
         <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
           Examination Scheme
@@ -83,15 +75,15 @@ export default function IslamicHistory2027Library({
           {[
             {
               label: "Class 9 Theory",
-              value: `${islamicHistory2027Info.partI.marks} Marks`,
+              value: `${info.partI.marks} Marks`,
             },
             {
               label: "Examination Duration",
-              value: islamicHistory2027Info.partI.duration,
+              value: info.partI.duration,
             },
             {
               label: "Class 9 Chapters",
-              value: `${islamicHistory2027Info.class9Chapters} Chapters`,
+              value: `${info.class9Chapters} Chapters`,
             },
           ].map((item) => (
             <div
@@ -101,7 +93,6 @@ export default function IslamicHistory2027Library({
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 {item.label}
               </p>
-
               <p className="mt-2 text-xl font-extrabold text-gray-900 dark:text-white">
                 {item.value}
               </p>
@@ -110,16 +101,14 @@ export default function IslamicHistory2027Library({
         </div>
       </section>
 
-      {/* Class 9 Chapters */}
       <section>
         <div className="mb-5">
           <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white">
             Class 9 Syllabus — Part I
           </h2>
-
           <p className="mt-2 text-sm leading-6 text-gray-500 dark:text-gray-400">
-            The following five chapters are listed under Part I
-            in the BISE Lahore 2025–2027 syllabus.
+            Five chapters listed under Part I in the BISE Lahore
+            2025–2027 syllabus.
           </p>
         </div>
 
@@ -138,7 +127,6 @@ export default function IslamicHistory2027Library({
                   <h3 className="font-bold leading-6 text-gray-900 dark:text-white">
                     {chapter.title}
                   </h3>
-
                   <p className="mt-2 text-xs font-semibold text-gray-500 dark:text-gray-400">
                     Class IX · Part I
                   </p>
@@ -173,16 +161,15 @@ export default function IslamicHistory2027Library({
         </div>
       </section>
 
-      {/* Class 10 Reference */}
       <section className="rounded-2xl border border-purple-200 bg-purple-50/60 p-5 dark:border-purple-900/50 dark:bg-purple-950/20">
         <h2 className="text-lg font-bold text-gray-900 dark:text-white">
           Class 10 — Part II Reference
         </h2>
 
         <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">
-          These four chapters are shown separately as the Part-II
-          reference for the combined IX–X textbook. They are not
-          included in the Class 9 chapter list.
+          These four chapters belong to the Part-II reference
+          of the combined IX–X textbook. They are not included
+          in the Class 9 chapter list.
         </p>
 
         <div className="mt-4 space-y-3">
@@ -211,15 +198,15 @@ export default function IslamicHistory2027Library({
         <div className="mt-4 rounded-xl bg-orange-100/70 p-4 dark:bg-orange-950/30">
           <p className="text-sm leading-6 text-orange-900 dark:text-orange-200">
             <strong>Verification note:</strong> The official syllabus
-            PDF labels the Part-II heading as Class IX, although Part-I
-            is also labelled Class IX. This apparent inconsistency
-            needs confirmation from the board. Part-II is therefore
-            displayed separately and not treated as Class 9 content.
+            PDF labels the Part-II heading as Class IX, although
+            Part-I is also labelled Class IX. This apparent
+            inconsistency requires confirmation from the Board.
+            Part-II is therefore displayed separately and is not
+            treated as Class 9 content.
           </p>
         </div>
       </section>
 
-      {/* ALP Status */}
       <section className="rounded-2xl border border-orange-200 bg-orange-50/70 p-5 dark:border-orange-900/50 dark:bg-orange-950/20">
         <h2 className="text-lg font-bold text-gray-900 dark:text-white">
           2027 ALP & Deletion Status
@@ -232,14 +219,8 @@ export default function IslamicHistory2027Library({
         <p className="mt-3 text-sm leading-7 text-gray-700 dark:text-gray-300">
           {islamicHistory2027DeletionSummary.note}
         </p>
-
-        <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
-          Verified deletion entries:{" "}
-          <strong>{islamicHistory2027Deletions.length}</strong>
-        </p>
       </section>
 
-      {/* Textbook Details */}
       <section className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-900">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white">
           Prescribed Textbook
@@ -247,33 +228,22 @@ export default function IslamicHistory2027Library({
 
         <div className="mt-4 space-y-3 text-sm leading-7 text-gray-700 dark:text-gray-300">
           <p>
-            <strong>Book:</strong>{" "}
-            {islamicHistory2027Info.textbookTitle}
+            <strong>Book:</strong> {info.textbookTitle}
           </p>
-
           <p>
-            <strong>Author:</strong>{" "}
-            {islamicHistory2027Info.author}
+            <strong>Author:</strong> {info.author}
           </p>
-
           <p>
-            <strong>Publisher:</strong>{" "}
-            {islamicHistory2027Info.publisher}
+            <strong>Publisher:</strong> {info.publisher}
           </p>
-
           <p>
-            <strong>Edition:</strong>{" "}
-            {islamicHistory2027Info.textbookEdition}
+            <strong>Edition:</strong> {info.textbookEdition}
           </p>
-
           <p>
-            <strong>Medium:</strong>{" "}
-            {islamicHistory2027Info.medium}
+            <strong>Medium:</strong> {info.medium}
           </p>
-
           <p>
-            <strong>Academic Session:</strong>{" "}
-            {islamicHistory2027Info.academicSession}
+            <strong>Academic Session:</strong> {info.academicSession}
           </p>
         </div>
 
@@ -286,7 +256,6 @@ export default function IslamicHistory2027Library({
         </div>
       </section>
 
-      {/* Official Source */}
       <section className="rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800/50">
         <h2 className="font-bold text-gray-900 dark:text-white">
           Official Syllabus Reference
@@ -298,16 +267,24 @@ export default function IslamicHistory2027Library({
         </p>
 
         <a
-          href="https://home.biselahore.com/downloads/notifications/misc/Syllabus_9th%2610th_%282025_27%29.pdf"
+          href={info.sources.boardSyllabus}
           target="_blank"
           rel="noopener noreferrer"
           className="mt-4 inline-flex font-semibold text-emerald-700 underline underline-offset-4 hover:text-emerald-900 dark:text-emerald-300"
         >
-          View BISE Lahore Official Syllabus
+          View BISE Lahore Official Syllabus ↗
+        </a>
+
+        <a
+          href={info.sources.officialBooks}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 block font-semibold text-emerald-700 underline underline-offset-4 hover:text-emerald-900 dark:text-emerald-300"
+        >
+          PECTAA Official Books & Publications ↗
         </a>
       </section>
 
-      {/* Back */}
       <div>
         <Link
           href="/classes"
